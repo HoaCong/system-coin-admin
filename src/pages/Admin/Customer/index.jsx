@@ -2,6 +2,7 @@
 import ActionTable from "components/common/ActionTable";
 import CustomPagination from "components/common/CustomPagination";
 import CustomTooltip from "components/common/CustomTooltip";
+import LazyLoadImage from "components/common/LazyLoadImage";
 import LinearProgress from "components/common/LinearProgress";
 import ToggleSwitch from "components/common/ToggleSwitch";
 import TemplateContent from "components/layout/TemplateContent";
@@ -17,7 +18,7 @@ import FormCustomer from "./FormCustomer";
 
 function Customer(props) {
   const {
-    listStatus: { isLoading },
+    listStatus: { isLoading, isSuccess, isFailure },
     actionStatus: { isLoading: actionLoading, isSuccess: actionSuccess },
     list,
     params,
@@ -120,6 +121,9 @@ function Customer(props) {
                 #
               </th>
               <th scope="col" className="align-middle">
+                Hình ảnh
+              </th>
+              <th scope="col" className="align-middle">
                 Tên khách hàng
               </th>
               <th scope="col" className="align-middle">
@@ -142,7 +146,7 @@ function Customer(props) {
           <tbody>
             {isLoading && _size(list) === 0 && (
               <tr>
-                <td colSpan={9}>
+                <td colSpan={8}>
                   <div
                     className="d-flex justify-content-center align-items-center w-full"
                     style={{ height: 400 }}
@@ -159,6 +163,14 @@ function Customer(props) {
                 <th scope="row" className="align-middle">
                   {index + 1}
                 </th>
+                <td className="align-middle">
+                  <LazyLoadImage
+                    src={item.image}
+                    alt={item.name}
+                    witdh={50}
+                    height={50}
+                  />
+                </td>
                 <td className="align-middle">{item.full_name || "_"}</td>
                 <td className="align-middle">{item.email || "_"}</td>
                 <td className="align-middle">{item.phone || "_"}</td>
@@ -192,6 +204,13 @@ function Customer(props) {
                 </td>
               </tr>
             ))}
+            {!list?.length && (isSuccess || isFailure) && (
+              <tr>
+                <td colSpan={8} align="center">
+                  Không tìm thấy dữ liệu
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
         {isLoading && _size(list) > 0 && (

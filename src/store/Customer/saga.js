@@ -64,13 +64,14 @@ function* callApiAdd({ params }) {
 
 function* callApiEdit({ params }) {
   try {
-    const { id, email, phone, full_name, password, ref_email } = params;
+    const { id, email, phone, full_name, password, image, ref_email } = params;
     const response = yield call(PUT, ENDPOINT.EDIT_CUSTOMER + id, {
-      email,
+      // email,
       phone,
       full_name,
-      password,
-      ref_email,
+      image,
+      // password,
+      // ref_email,
     });
 
     if (response.status === 200) {

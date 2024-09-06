@@ -13,7 +13,7 @@ import FormGuire from "./FormGuire";
 
 function Guire(props) {
   const {
-    listStatus: { isLoading },
+    listStatus: { isLoading, isSuccess, isFailure },
     actionStatus: { isLoading: actionLoading, isSuccess: actionSuccess },
     list,
     params,
@@ -75,7 +75,7 @@ function Guire(props) {
             setDetail((prev) => ({ ...prev, visible: true, type: "create" })),
         }}
       >
-        <table className="table">
+        <table className="table table-hover table-striped">
           <thead>
             <tr>
               <th scope="col">#</th>
@@ -139,6 +139,13 @@ function Guire(props) {
                 </td>
               </tr>
             ))}
+            {!list?.length && (isSuccess || isFailure) && (
+              <tr>
+                <td colSpan={8} align="center">
+                  Không tìm thấy dữ liệu
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
         <CustomPagination

@@ -3,7 +3,6 @@ import ActionTable from "components/common/ActionTable";
 import CustomPagination from "components/common/CustomPagination";
 import CustomTooltip from "components/common/CustomTooltip";
 import LinearProgress from "components/common/LinearProgress";
-import ToggleSwitch from "components/common/ToggleSwitch";
 import TemplateContent from "components/layout/TemplateContent";
 import _size from "lodash/size";
 import { useEffect, useState } from "react";
@@ -20,7 +19,7 @@ import { roleEnum } from "./helper";
 
 function Employee(props) {
   const {
-    listStatus: { isLoading },
+    listStatus: { isLoading, isSuccess, isFailure },
     actionStatus: { isLoading: actionLoading, isSuccess: actionSuccess },
     list,
     params,
@@ -224,6 +223,13 @@ function Employee(props) {
                   </td>
                 </tr>
               ))}
+              {!list?.length && (isSuccess || isFailure) && (
+                <tr>
+                  <td colSpan={8} align="center">
+                    Không tìm thấy dữ liệu
+                  </td>
+                </tr>
+              )}
             </tbody>
           </table>
         </div>

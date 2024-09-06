@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import ModalBlock from "components/common/Modal";
 // import UploadImage from "components/common/UploadImage";
+import UploadImage from "components/common/UploadImage";
 import _capitalize from "lodash/capitalize";
 import _isEmpty from "lodash/isEmpty";
 import _omit from "lodash/omit";
@@ -13,6 +14,7 @@ const initialData = {
   full_name: "",
   email: "",
   phone: "",
+  image: "",
   password: "",
   ref_email: "",
 };
@@ -144,6 +146,7 @@ function FormCustomer({ data: { type, visible, info }, onClear }) {
             defaultValue={data.email}
             aria-describedby="helperEmail"
             onChange={handleChange}
+            disabled={type === "edit"}
           />
           {error.email && (
             <Form.Text
@@ -167,7 +170,6 @@ function FormCustomer({ data: { type, visible, info }, onClear }) {
             maxLength={11}
             defaultValue={data.phone}
             aria-describedby="helperPhone"
-            disabled={type === "edit"}
             onChange={handleChange}
           />
           {error.phone && (
@@ -190,6 +192,7 @@ function FormCustomer({ data: { type, visible, info }, onClear }) {
             name="ref_email"
             defaultValue={data.ref_email}
             aria-describedby="helperref_email"
+            disabled={type === "edit"}
             onChange={handleChange}
           />
           {error.ref_email && (
@@ -213,7 +216,7 @@ function FormCustomer({ data: { type, visible, info }, onClear }) {
             name="password"
             defaultValue={data.password}
             aria-describedby="helperPassword"
-            disabled={type === "detail"}
+            disabled={type === "detail" || type === "edit"}
             onChange={handleChange}
           />
           {error.password && (
@@ -227,31 +230,33 @@ function FormCustomer({ data: { type, visible, info }, onClear }) {
           )}
         </div>
 
-        {/* <div className="col-6 mt-3">
-          <Form.Label htmlFor="Image">Hình ảnh</Form.Label>
-          <UploadImage
-            image={data.image || ""}
-            callback={(url) =>
-              handleChange({
-                target: {
-                  name: "image",
-                  value: url,
-                },
-              })
-            }
-            geometry="radius"
-            showUpload={type !== "detail"}
-          />
-          {error.image && (
-            <Form.Text
-              id="helperImage"
-              danger="true"
-              bsPrefix="d-inline-block text-danger lh-1"
-            >
-              {error.image}
-            </Form.Text>
-          )}
-        </div> */}
+        {type === "edit" && (
+          <div className="col-6 mt-3">
+            <Form.Label htmlFor="Image">Hình ảnh</Form.Label>
+            <UploadImage
+              image={data.image || ""}
+              callback={(url) =>
+                handleChange({
+                  target: {
+                    name: "image",
+                    value: url,
+                  },
+                })
+              }
+              geometry="radius"
+              showUpload={type !== "detail"}
+            />
+            {error.image && (
+              <Form.Text
+                id="helperImage"
+                danger="true"
+                bsPrefix="d-inline-block text-danger lh-1"
+              >
+                {error.image}
+              </Form.Text>
+            )}
+          </div>
+        )}
       </form>
     </ModalBlock>
   );
