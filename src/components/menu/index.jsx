@@ -1,4 +1,4 @@
-import logo from "assets/images/logo192.png";
+import logo from "assets/images/logo.jpg";
 import { MENU_ADMIN } from "constants/routerMenu";
 import { ROUTES } from "constants/routerWeb";
 import { useCallback, useEffect, useState } from "react";
@@ -43,7 +43,11 @@ function Menu({ collapsed }) {
       {/* Logo header */}
       <div className="logo-header d-flex justify-content-center align-items-center gap-2 h-60px border-bottom">
         <Link to={ROUTES.HOME_PAGE}>
-          <img className="logo-header-img" src={logo} alt="logo apple-icon" />
+          <img
+            className="logo-header-img rounded-circle"
+            src={logo}
+            alt="logo apple-icon"
+          />
         </Link>
         <Link to={ROUTES.HOME_PAGE}>
           <h4 className="brand-header mb-1 text-white">ADMIN UI</h4>
