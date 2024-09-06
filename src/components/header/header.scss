@@ -1,0 +1,65 @@
+// .icon-login {
+//   background: url("../../assets/images/icon_login.png") no-repeat;
+// }
+// .icon-register {
+//   background: url("../../assets/images/icon-register.png") no-repeat;
+// }
+
+#header {
+  background: linear-gradient(
+    0deg,
+    rgba(3, 66, 11, 1) 0%,
+    rgba(10, 161, 26, 1) 100%
+  );
+}
+
+.navbar-nav {
+  a {
+    position: relative;
+    transition: all 0.5s;
+    &.active {
+      color: #f89c2e !important;
+      &::after {
+        content: "";
+        height: 2px;
+        background: #f89d30;
+        position: absolute;
+        bottom: -12px;
+        right: 0px;
+        left: 0px;
+      }
+    }
+    &:hover {
+      color: #f89c2e !important;
+    }
+  }
+}
+
+@media screen and (max-width: 992px) {
+  #mobile-nav {
+    z-index: 3;
+    border-radius: 0 0 16px 16px;
+
+    background: linear-gradient(
+      0deg,
+      rgba(3, 66, 11, 1) 0%,
+      rgba(10, 161, 26, 1) 100%
+    );
+  }
+  .navbar-nav {
+    a {
+      &.active {
+        &::after {
+          content: "";
+          bottom: 0px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 578px) {
+  #mobile-nav {
+    margin-inline: -16px;
+  }
+}

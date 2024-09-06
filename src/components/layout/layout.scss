@@ -1,0 +1,32 @@
+.btn-mobile {
+  background-color: inherit;
+  display: none;
+  border-radius: 5px;
+  // border: 1px solid gray;
+  border: none;
+  img {
+    width: 24px;
+    height: 24px;
+  }
+  &:hover {
+    scale: 1.1;
+  }
+}
+.height-content {
+  min-height: calc(100vh - 60px);
+}
+.footer-bg {
+  background-color: #212631;
+}
+
+#template {
+  .title {
+    font-family: "Public Sans", sans-serif;
+    color: rgb(33, 43, 54);
+  }
+}
+@media only screen and (max-width: 1024px) {
+  .btn-mobile {
+    display: block !important;
+  }
+}

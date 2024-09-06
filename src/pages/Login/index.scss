@@ -1,0 +1,28 @@
+.sign-in__wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+.sign-in__wrapper form {
+  z-index: 1;
+  margin: 30px auto 15px auto;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  width: 400px;
+  max-width: 90%;
+}
+
+.sign-in__wrapper form img {
+  width: 4rem;
+}

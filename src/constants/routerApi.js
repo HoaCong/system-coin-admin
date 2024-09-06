@@ -1,0 +1,37 @@
+export const ENDPOINT = {
+  LOGIN: "/api/login",
+  REGISTER: "/register",
+  // ======/api/employee======
+  LIST_EMPLOYEE: "/api/employee/search",
+  ADD_EMPLOYEE: "/api/employee/create",
+  EDIT_EMPLOYEE: "/api/employee/",
+  ACTIVE_EMPLOYEE: "/api/employee/active/",
+  DETAIL_EMPLOYEE: "/api/employee/",
+  DELETE_EMPLOYEE: "/api/employee/",
+  UPDATE_DETAIL_EMPLOYEE: "/api/employee/detail/",
+  // ======coin======
+  DETAIL_COIN: "api/coins",
+  LIST_COIN: "api/coin",
+  ADD_COIN: "api/coin/create",
+  EDIT_COIN: "api/coin/",
+  DELETE_COIN: "api/coin/",
+  // ======news======
+  DETAIL_NEWS: "api/news",
+  LIST_NEWS: "api/new",
+  ADD_NEWS: "api/new/create",
+  EDIT_NEWS: "api/new/",
+  DELETE_NEWS: "api/new/",
+  // ======guires======
+  DETAIL_GUIRE: "api/guidlines",
+  LIST_GUIRE: "api/guidline",
+  ADD_GUIRE: "api/guidline/create",
+  EDIT_GUIRE: "api/guidline/",
+  DELETE_GUIRE: "api/guidline/",
+  // ======/api/customer======
+  LIST_CUSTOMER: "/api/customer/search",
+  ADD_CUSTOMER: "/api/customer/create",
+  EDIT_CUSTOMER: "/api/customer/",
+  ACTIVE_CUSTOMER: "/api/customer/active/",
+  DETAIL_CUSTOMER: "/api/customer/",
+  UPDATE_DETAIL_CUSTOMER: "/api/customer/detail/",
+};
