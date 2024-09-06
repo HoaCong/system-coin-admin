@@ -22,7 +22,7 @@ const CheckTokenMiddleware = ({ children }) => {
     if (!access_token || checkTimeExpired(timeExpired)) {
       if (isLoginPage) return;
       return navigate(ROUTES.LOGIN);
-    } else if (isLoginPage) {
+    } else if (isLoginPage || pathname === ROUTES.HOME_PAGE) {
       return navigate(EnumHome[user?.role_id]);
     }
   }, [access_token, pathname]);

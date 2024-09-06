@@ -1,5 +1,5 @@
 {
-    "name": "base-layout",
+    "name": "system-coin-admin",
     "version": "0.1.1",
     "private": true,
     "dependencies": {

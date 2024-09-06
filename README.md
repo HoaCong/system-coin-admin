@@ -1,6 +1,6 @@
 # Base layout
 
-### base-layout
+### system-coin-admin
 
 ## Install package
 
