@@ -75,7 +75,10 @@ function Coin(props) {
           <thead>
             <tr>
               <th scope="col">#</th>
+              <th scope="col">Hình ảnh</th>
               <th scope="col">Tên coin</th>
+              <th scope="col">Giá mua</th>
+              <th scope="col">Giá bán</th>
               <th scope="col">Số dư</th>
               <th scope="col">Địa chỉ mua</th>
               <th scope="col">Hành động</th>
@@ -84,7 +87,7 @@ function Coin(props) {
           <tbody>
             {isLoading && _size(list) === 0 && (
               <tr>
-                <td colSpan={5}>
+                <td colSpan={16}>
                   <div
                     className="d-flex justify-content-center align-items-center w-full"
                     style={{ height: 400 }}
@@ -101,7 +104,20 @@ function Coin(props) {
                 <th scope="row" className="align-middle">
                   {index + 1}
                 </th>
+                <td className="align-middle">
+                  {" "}
+                  <td className="align-middle">
+                    <LazyLoadImage
+                      src={item.image}
+                      alt={item.name}
+                      witdh={50}
+                      height={50}
+                    />
+                  </td>
+                </td>
                 <td className="align-middle">{item?.name}</td>
+                <td className="align-middle">{item?.giamua}</td>
+                <td className="align-middle">{item?.gaiban}</td>
                 <td className="align-middle">{item?.sodu}</td>
                 <td className="align-middle">{item?.address_pay}</td>
                 <td className="align-middle" style={{ width: 200 }}>

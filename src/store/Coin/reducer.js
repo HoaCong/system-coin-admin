@@ -89,6 +89,10 @@ const coinReducer = (state = initialState, action) => {
         draft.actionStatus.isFailure = true;
         break;
 
+      case ActionTypes.RESET_DATA_ACTION:
+        draft.actionStatus = { ...status };
+        break;
+
       case ActionTypes.RESET_DATA:
         return initialState;
 

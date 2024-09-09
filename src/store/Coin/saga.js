@@ -63,11 +63,14 @@ function* callApiAdd({ params }) {
 
 function* callApiEdit({ params }) {
   try {
-    const { id, name, sodu, address_pay } = params;
+    const { id, name, sodu, address_pay, image, giamua, giaban } = params;
     const response = yield call(PUT, ENDPOINT.EDIT_COIN + id, {
       name,
       sodu,
       address_pay,
+      image,
+      giamua,
+      giaban,
     });
 
     if (response.status === 200) {

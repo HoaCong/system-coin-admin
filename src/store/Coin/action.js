@@ -63,3 +63,7 @@ export const actionDeleteFailed = (error) => ({
 export const resetData = () => ({
   type: ActionTypes.RESET_DATA,
 });
+
+export const resetDataAction = () => ({
+  type: ActionTypes.RESET_DATA_ACTION,
+});
