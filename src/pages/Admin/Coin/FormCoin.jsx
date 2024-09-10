@@ -4,6 +4,7 @@ import UploadImage from "components/common/UploadImage";
 import { useFormik } from "formik";
 import { useEffect } from "react";
 import { Col, Form, Row } from "react-bootstrap";
+import { NumericFormat } from "react-number-format";
 import { useDispatch, useSelector } from "react-redux";
 import { actionAdd, actionEdit, resetDataAction } from "store/Coin/action";
 import * as Yup from "yup";
@@ -38,20 +39,26 @@ function FormCoin({ data: { type, visible, info }, onClear }) {
   const onResetDataAction = () => dispatch(resetDataAction());
 
   const formik = useFormik({
-    initialValues: info || initialData,
+    initialValues: initialData,
     validationSchema,
     onSubmit: (values) => {
       if (type === "create") onAddCoin(values);
       if (type === "edit") onEditCoin(values);
     },
   });
-  console.log(111111, formik.values);
 
   useEffect(() => {
     if (isSuccess) {
+      console.log("useEffect  isSuccess:", isSuccess);
       handleClose();
     }
   }, [isSuccess]);
+
+  useEffect(() => {
+    if (info) {
+      formik.setValues(info);
+    }
+  }, [info]);
 
   const handleClose = () => {
     onClear();
@@ -84,10 +91,10 @@ function FormCoin({ data: { type, visible, info }, onClear }) {
               <Form.Control
                 id="name"
                 name="name"
-                type="text"
+                placeholder="Tên coin"
                 disabled={type === "detail"}
-                value={formik.values.name}
-                {...formik.getFieldProps("name")}
+                value={formik.values.name || ""}
+                onChange={formik.handleChange}
               />
               {formik.touched.name && formik.errors.name ? (
                 <Form.Text className="text-danger">
@@ -101,13 +108,16 @@ function FormCoin({ data: { type, visible, info }, onClear }) {
               <Form.Label htmlFor="sodu">
                 Số dư <span className="required">*</span>
               </Form.Label>
-              <Form.Control
+              <NumericFormat
                 id="sodu"
                 name="sodu"
-                type="number"
+                placeholder="Số dư"
+                displayType={"input"}
+                className="form-control shadow-none"
+                value={formik.values.sodu || ""}
+                onChange={formik.handleChange}
                 disabled={type === "detail"}
-                value={formik.values.sodu}
-                {...formik.getFieldProps("sodu")}
+                thousandSeparator=","
               />
               {formik.touched.sodu && formik.errors.sodu ? (
                 <Form.Text className="text-danger">
@@ -124,13 +134,15 @@ function FormCoin({ data: { type, visible, info }, onClear }) {
               <Form.Label htmlFor="giamua">
                 Giá mua <span className="required">*</span>
               </Form.Label>
-              <Form.Control
+              <NumericFormat
                 id="giamua"
                 name="giamua"
-                type="number"
-                disabled={type === "detail"}
-                value={formik.values.giamua}
-                {...formik.getFieldProps("giamua")}
+                placeholder="Giá mua"
+                displayType={"input"}
+                className="form-control shadow-none"
+                value={formik.values.giamua || ""}
+                onChange={formik.handleChange}
+                thousandSeparator=","
               />
               {formik.touched.giamua && formik.errors.giamua ? (
                 <Form.Text className="text-danger">
@@ -144,13 +156,15 @@ function FormCoin({ data: { type, visible, info }, onClear }) {
               <Form.Label htmlFor="giaban">
                 Giá bán <span className="required">*</span>
               </Form.Label>
-              <Form.Control
+              <NumericFormat
                 id="giaban"
                 name="giaban"
-                type="number"
-                disabled={type === "detail"}
-                value={formik.values.giaban}
-                {...formik.getFieldProps("giaban")}
+                placeholder="Giá bán"
+                displayType={"input"}
+                className="form-control shadow-none"
+                value={formik.values.giaban || ""}
+                onChange={formik.handleChange}
+                thousandSeparator=","
               />
               {formik.touched.giaban && formik.errors.giaban ? (
                 <Form.Text className="text-danger">
@@ -170,10 +184,10 @@ function FormCoin({ data: { type, visible, info }, onClear }) {
               <Form.Control
                 id="address_pay"
                 name="address_pay"
-                type="text"
+                placeholder="Địa chỉ mua"
                 disabled={type === "detail"}
-                value={formik.values.address_pay}
-                {...formik.getFieldProps("address_pay")}
+                value={formik?.values?.address_pay || ""}
+                onChange={formik.handleChange}
               />
               {formik.touched.address_pay && formik.errors.address_pay ? (
                 <Form.Text className="text-danger">

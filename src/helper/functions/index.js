@@ -5,6 +5,8 @@ export const parserRouter = (router, id) => {
   return router.replace(":id", id);
 };
 
+export const formatNumber = (value) => value?.toLocaleString("en-En");
+
 export const speak = (text) => {
   const speechSynthesis = window.speechSynthesis;
   const utterance = new SpeechSynthesisUtterance(text);

@@ -4,6 +4,7 @@ import CustomPagination from "components/common/CustomPagination";
 import CustomTooltip from "components/common/CustomTooltip";
 import LazyLoadImage from "components/common/LazyLoadImage";
 import TemplateContent from "components/layout/TemplateContent";
+import { formatNumber } from "helper/functions";
 import _size from "lodash/size";
 import { useEffect, useState } from "react";
 import { Spinner } from "react-bootstrap";
@@ -27,7 +28,7 @@ function Coin(props) {
 
   const [currentPage, setCurrentPage] = useState(1);
   const [detail, setDetail] = useState({
-    topic: {},
+    info: null,
     visible: false,
     type: "",
   });
@@ -87,7 +88,7 @@ function Coin(props) {
           <tbody>
             {isLoading && _size(list) === 0 && (
               <tr>
-                <td colSpan={16}>
+                <td colSpan={8}>
                   <div
                     className="d-flex justify-content-center align-items-center w-full"
                     style={{ height: 400 }}
@@ -100,12 +101,11 @@ function Coin(props) {
               </tr>
             )}
             {list.map((item, index) => (
-              <tr key={item.updatedat + index}>
+              <tr key={item.updatedAt + index}>
                 <th scope="row" className="align-middle">
                   {index + 1}
                 </th>
                 <td className="align-middle">
-                  {" "}
                   <td className="align-middle">
                     <LazyLoadImage
                       src={item.image}
@@ -116,9 +116,9 @@ function Coin(props) {
                   </td>
                 </td>
                 <td className="align-middle">{item?.name}</td>
-                <td className="align-middle">{item?.giamua}</td>
-                <td className="align-middle">{item?.gaiban}</td>
-                <td className="align-middle">{item?.sodu}</td>
+                <td className="align-middle">{formatNumber(item?.giamua)}</td>
+                <td className="align-middle">{formatNumber(item?.giaban)}</td>
+                <td className="align-middle">{formatNumber(item?.sodu)}</td>
                 <td className="align-middle">{item?.address_pay}</td>
                 <td className="align-middle" style={{ width: 200 }}>
                   <ActionTable
