@@ -80,7 +80,9 @@ function Guire(props) {
             <tr>
               <th scope="col">#</th>
               <th scope="col">Hình ảnh</th>
-              <th scope="col">Tiêu đề</th>
+              <th scope="col" style={{ width: 250 }}>
+                Tiêu đề
+              </th>
               <th scope="col">Nội dung</th>
               <th scope="col">Video URL</th>
               <th scope="col">Hành động</th>
