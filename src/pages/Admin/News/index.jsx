@@ -26,8 +26,8 @@ function News(props) {
   } = useSelector((state) => state.loginReducer);
 
   const dispatch = useDispatch();
-  const onGetListCategory = (body) => dispatch(actionGetList(body));
-  const onDeleteCategory = (body) => dispatch(actionDelete(body));
+  const onGetList = (body) => dispatch(actionGetList(body));
+  const onDelete = (body) => dispatch(actionDelete(body));
   const onResetData = () => dispatch(resetData());
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -43,7 +43,7 @@ function News(props) {
   });
 
   useEffect(() => {
-    if (!isLoading) onGetListCategory(params);
+    if (!isLoading) onGetList(params);
     return () => {
       onResetData();
     };
@@ -55,7 +55,7 @@ function News(props) {
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
-    onGetListCategory({ ...params, page });
+    onGetList({ ...params, page });
   };
 
   const onCloseTooltip = () => {
@@ -168,7 +168,7 @@ function News(props) {
         tooltip={tooltip}
         loading={actionLoading}
         onClose={onCloseTooltip}
-        onDelete={() => onDeleteCategory(tooltip.id)}
+        onDelete={() => onDelete(tooltip.id)}
       />
     </div>
   );

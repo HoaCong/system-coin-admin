@@ -6,6 +6,7 @@ import coinReducer from "./Coin/reducer";
 import customerReducer from "./Customer/reducer";
 import employeeReducer from "./Employee/reducer";
 import guireReducer from "./Guire/reducer";
+import historiesReducer from "./Histories/reducer";
 import loginReducer from "./Login/reducer";
 import newsReducer from "./News/reducer";
 import toastReducer from "./Toast/reducer";
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   changePasswordReducer,
   customerReducer,
   coinReducer,
+  historiesReducer,
 });
 
 export default rootReducer;

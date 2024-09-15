@@ -28,10 +28,14 @@ export const ENDPOINT = {
   EDIT_GUIRE: "api/guidline/",
   DELETE_GUIRE: "api/guidline/",
   // ======/api/customer======
-  LIST_CUSTOMER: "/api/customer/search",
-  ADD_CUSTOMER: "/api/customer/create",
-  EDIT_CUSTOMER: "/api/customer/",
-  ACTIVE_CUSTOMER: "/api/customer/active/",
-  DETAIL_CUSTOMER: "/api/customer/",
-  UPDATE_DETAIL_CUSTOMER: "/api/customer/detail/",
+  LIST_CUSTOMER: "api/customer/search",
+  ADD_CUSTOMER: "api/customer/create",
+  EDIT_CUSTOMER: "api/customer/",
+  ACTIVE_CUSTOMER: "api/customer/active/",
+  DETAIL_CUSTOMER: "api/customer/",
+  UPDATE_DETAIL_CUSTOMER: "api/customer/detail/",
+  // ======api/histoties======
+  LIST_HISTORIES: "api/admin/order-coins",
+  CONFIRM_HISTORIES: (id) => `api/order-coins/${id}`,
+  CANCEL_HISTORIES: (id) => `api/order-coins/${id}`,
 };

@@ -1,5 +1,4 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import ActionTable from "components/common/ActionTable";
 import CustomPagination from "components/common/CustomPagination";
 import CustomTooltip from "components/common/CustomTooltip";
 import LazyLoadImage from "components/common/LazyLoadImage";
@@ -7,35 +6,38 @@ import TemplateContent from "components/layout/TemplateContent";
 import { formatNumber } from "helper/functions";
 import _size from "lodash/size";
 import { useEffect, useState } from "react";
-import { Spinner } from "react-bootstrap";
+import { Button, Form, Spinner } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { actionDelete, actionGetList, resetData } from "store/Coin/action";
-import FormCoin from "./FormCoin";
+import {
+  actionCancel,
+  actionConfirm,
+  actionGetList,
+  resetData,
+} from "store/Histories/action";
 
-function Coin(props) {
+function Histories(props) {
   const {
     listStatus: { isLoading, isSuccess, isFailure },
     actionStatus: { isLoading: actionLoading, isSuccess: actionSuccess },
     list,
     params,
     meta,
-  } = useSelector((state) => state.coinReducer);
+  } = useSelector((state) => state.historiesReducer);
 
   const dispatch = useDispatch();
   const onGetList = (body) => dispatch(actionGetList(body));
-  const onDelete = (body) => dispatch(actionDelete(body));
+  const onConfirm = (body) => dispatch(actionConfirm(body));
+  const onCancel = (body) => dispatch(actionCancel(body));
   const onResetData = () => dispatch(resetData());
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [detail, setDetail] = useState({
-    info: null,
-    visible: false,
-    type: "",
-  });
+  const [query, setQuery] = useState("");
+
   const [tooltip, setTooltip] = useState({
     target: null,
     visible: false,
     id: null,
+    type: "",
   });
 
   useEffect(() => {
@@ -61,16 +63,55 @@ function Coin(props) {
       id: null,
     });
   };
+  const handleSubmitTooltip = () => {
+    if (tooltip.type === "confirm") {
+      onConfirm(tooltip.id);
+    } else {
+      onCancel(tooltip.id);
+    }
+  };
+
+  const handleSearch = (type) => {
+    const tmpQuery = !query || type === "reset" ? null : query.trim();
+    onGetList({ ...params, page: 1, query: tmpQuery });
+    setCurrentPage(1);
+    if (type === "reset") setQuery("");
+  };
 
   return (
     <div className="mb-5">
       <TemplateContent
-        title="Danh sách coin"
-        showNew
-        btnProps={{
-          onClick: () =>
-            setDetail((prev) => ({ ...prev, visible: true, type: "create" })),
-        }}
+        title="Lịch sử giao dịch"
+        filter={
+          <div className="d-flex align-items-end gap-2">
+            <div style={{ width: "100%", maxWidth: 250 }}>
+              <Form.Label htmlFor="search">Tìm kiếm</Form.Label>
+              <Form.Control
+                id="search"
+                aria-label="Tìm kiếm"
+                placeholder="Tìm kiếm theo sku"
+                name="query"
+                value={query}
+                onChange={(e) => {
+                  setQuery(e.target.value);
+                }}
+              ></Form.Control>
+            </div>
+            <Button
+              onClick={() => handleSearch("filter")}
+              disabled={isLoading && _size(list) > 0}
+            >
+              Tìm kiếm
+            </Button>
+            <Button
+              variant="outline-secondary"
+              disabled={isLoading && _size(list) > 0}
+              onClick={() => handleSearch("reset")}
+            >
+              Đặt lại
+            </Button>
+          </div>
+        }
       >
         <table className="table table-hover table-striped">
           <thead>
@@ -121,24 +162,46 @@ function Coin(props) {
                 <td className="align-middle">{formatNumber(item?.sodu)}</td>
                 <td className="align-middle">{item?.address_pay}</td>
                 <td className="align-middle" style={{ width: 200 }}>
-                  <ActionTable
-                    onDetail={() =>
-                      setDetail({ info: item, visible: true, type: "detail" })
-                    }
-                    onEdit={() =>
-                      setDetail({ info: item, visible: true, type: "edit" })
-                    }
-                    onDelete={(e) => {
-                      setTooltip((prev) => {
-                        return {
-                          visible:
-                            prev.target === e.target ? !tooltip.visible : true,
-                          target: e.target,
-                          id: item.id,
-                        };
-                      });
-                    }}
-                  />
+                  <div className="d-flex gap-2">
+                    <button
+                      className="btn btn-outline-primary rounded-circle d-flex justify-content-center align-items-center"
+                      style={{ width: 30, height: 30 }}
+                      onClick={(e) => {
+                        setTooltip((prev) => {
+                          return {
+                            visible:
+                              prev.target === e.target
+                                ? !tooltip.visible
+                                : true,
+                            target: e.target,
+                            id: item.id,
+                            type: "cancel",
+                          };
+                        });
+                      }}
+                    >
+                      <i className="far fa-times-circle"></i>
+                    </button>
+                    <button
+                      className="btn btn-outline-primary rounded-circle d-flex justify-content-center align-items-center"
+                      style={{ width: 30, height: 30 }}
+                      onClick={(e) =>
+                        setTooltip((prev) => {
+                          return {
+                            visible:
+                              prev.target === e.target
+                                ? !tooltip.visible
+                                : true,
+                            target: e.target,
+                            id: item.id,
+                            type: "confirm",
+                          };
+                        })
+                      }
+                    >
+                      <i className="far fa-check-circle"></i>
+                    </button>
+                  </div>
                 </td>
               </tr>
             ))}
@@ -159,19 +222,17 @@ function Coin(props) {
           currentPage={currentPage}
         />
       </TemplateContent>
-      <FormCoin
-        data={detail}
-        onClear={() => setDetail({ info: {}, visible: false, type: "" })}
-      />
       <CustomTooltip
-        content="Bạn có chắc muốn xóa coin này không?"
+        content={`Bạn có chắc muốn ${
+          tooltip.type === "confirm" ? "xác nhận" : "từ chối"
+        } giao dịch này không?`}
         tooltip={tooltip}
         loading={actionLoading}
         onClose={onCloseTooltip}
-        onDelete={() => onDelete(tooltip.id)}
+        onDelete={handleSubmitTooltip}
       />
     </div>
   );
 }
 
-export default Coin;
+export default Histories;

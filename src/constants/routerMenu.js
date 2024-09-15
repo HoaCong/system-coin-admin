@@ -14,6 +14,12 @@ export const MENU_ADMIN = [
     icon: <i className="fas fa-users"></i>,
   },
   {
+    label: "Lịch sử giao dịch",
+    active: false,
+    src: ROUTES.ADMIN_HISTORIES,
+    icon: <i className="fas fa-users"></i>,
+  },
+  {
     label: "Nhân viên",
     active: false,
     src: ROUTES.ADMIN_EMPLOYEE,

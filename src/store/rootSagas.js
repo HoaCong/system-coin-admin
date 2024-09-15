@@ -5,6 +5,7 @@ import coinSaga from "./Coin/saga";
 import customerSaga from "./Customer/saga";
 import employeeSaga from "./Employee/saga";
 import guireSaga from "./Guire/saga";
+import historiesSaga from "./Histories/saga";
 import loginSaga from "./Login/saga";
 import newsSaga from "./News/saga";
 export default function* rootSaga() {
@@ -16,5 +17,6 @@ export default function* rootSaga() {
     fork(coinSaga),
     fork(guireSaga),
     fork(customerSaga),
+    fork(historiesSaga),
   ]);
 }

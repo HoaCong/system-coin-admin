@@ -6,6 +6,7 @@ import AdminCustomer from "pages/Admin/Customer";
 import AdminDashboard from "pages/Admin/Dashboard";
 import AdminEmployee from "pages/Admin/Employee";
 import AdminGuire from "pages/Admin/Guire";
+import AdminHistories from "pages/Admin/Histories";
 import AdminNews from "pages/Admin/News";
 import Login from "pages/Login";
 import PageNotFound from "pages/NotFoundPage";
@@ -42,6 +43,11 @@ export const adminRoutes = [
         path: ROUTES.ADMIN_COIN,
         name: "Coin Page",
         element: <AdminCoin />,
+      },
+      {
+        path: ROUTES.ADMIN_HISTORIES,
+        name: "Histories Page",
+        element: <AdminHistories />,
       },
       {
         path: ROUTES.ADMIN_NEWS,
