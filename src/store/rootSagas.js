@@ -2,6 +2,7 @@
 import { all, fork } from "redux-saga/effects";
 import changePasswordSaga from "./ChangePassword/saga";
 import coinSaga from "./Coin/saga";
+import contactSaga from "./Contact/saga";
 import customerSaga from "./Customer/saga";
 import employeeSaga from "./Employee/saga";
 import guireSaga from "./Guire/saga";
@@ -18,5 +19,6 @@ export default function* rootSaga() {
     fork(guireSaga),
     fork(customerSaga),
     fork(historiesSaga),
+    fork(contactSaga),
   ]);
 }

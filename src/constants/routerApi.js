@@ -38,4 +38,8 @@ export const ENDPOINT = {
   LIST_HISTORIES: "api/admin/order-coins",
   CONFIRM_HISTORIES: (id) => `api/order-coins/${id}`,
   CANCEL_HISTORIES: (id) => `api/order-coins/${id}`,
+  // ======api/contact======
+  LIST_CONTACT: "api/contact",
+  CONFIRM_CONTACT: (id) => `api/submitcontact/${id}`,
+  CANCEL_CONTACT: (id) => `api/order-coins/${id}`,
 };

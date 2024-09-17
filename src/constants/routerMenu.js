@@ -43,4 +43,10 @@ export const MENU_ADMIN = [
     src: ROUTES.ADMIN_CUSTOMER,
     icon: <i className="fas fa-users"></i>,
   },
+  {
+    label: "Danh sách liên hệ",
+    active: false,
+    src: ROUTES.ADMIN_CONTACT,
+    icon: <i className="fas fa-users"></i>,
+  },
 ];

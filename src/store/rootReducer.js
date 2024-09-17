@@ -10,6 +10,7 @@ import historiesReducer from "./Histories/reducer";
 import loginReducer from "./Login/reducer";
 import newsReducer from "./News/reducer";
 import toastReducer from "./Toast/reducer";
+import contactReducer from "./Contact/reducer";
 
 const rootReducer = combineReducers({
   loginReducer,
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   customerReducer,
   coinReducer,
   historiesReducer,
+  contactReducer,
 });
 
 export default rootReducer;

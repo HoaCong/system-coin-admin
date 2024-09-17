@@ -2,8 +2,6 @@ export const ROUTES = {
   HOME_PAGE: "/",
   LOGIN: "/login",
   REGISTER: "/register",
-  NEWS: "/news",
-  GUIRE: "/guire",
   // admin routes
   ADMIN_HOME_PAGE: "/admin",
   ADMIN_DASHBOARD: "/admin/dashboard",
@@ -15,4 +13,5 @@ export const ROUTES = {
   ADMIN_HISTORIES: "/admin/histories",
   ADMIN_CUSTOMER: "/admin/customer",
   ADMIN_CUSTOMER_DETAIL: "/admin/customer/detail",
+  ADMIN_CONTACT: "/admin/contact",
 };

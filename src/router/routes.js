@@ -2,6 +2,7 @@ import AdminLayout from "components/layout/AdminLayout";
 import { ROUTES } from "constants/routerWeb";
 import AdminChangePassword from "pages/Admin/ChangePassword";
 import AdminCoin from "pages/Admin/Coin";
+import AdminContact from "pages/Admin/Contact";
 import AdminCustomer from "pages/Admin/Customer";
 import AdminDashboard from "pages/Admin/Dashboard";
 import AdminEmployee from "pages/Admin/Employee";
@@ -63,6 +64,11 @@ export const adminRoutes = [
         path: ROUTES.ADMIN_CUSTOMER,
         name: "Customer Page",
         element: <AdminCustomer />,
+      },
+      {
+        path: ROUTES.ADMIN_CONTACT,
+        name: "Contact Page",
+        element: <AdminContact />,
       },
       { path: "*", name: "Not Found Page", element: <PageNotFound /> },
     ],

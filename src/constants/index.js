@@ -1,7 +1,9 @@
 export const pageSize = 20;
 
 export const STATUS_LABEL = {
+  null: { bg: "secondary", name: "Đang xử lý" },
   IN_PROCCESS: { bg: "secondary", name: "Đang xử lý" },
+  CANCEL: { bg: "danger", name: "Đã từ chối" },
   CONFIRMED: { bg: "success", name: "Đã duyệt" },
   DESTROYED: { bg: "danger", name: "Đã hủy" },
   SUCCESS: { bg: "success", name: "Thành công" },
