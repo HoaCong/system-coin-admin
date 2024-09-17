@@ -47,7 +47,7 @@ const contactReducer = (state = initialState, action) => {
         draft.actionStatus.isLoading = false;
         draft.actionStatus.isSuccess = true;
         draft.list = state.list.map((item) =>
-          item.id === action.payload[0] ? { ...item, status: "CANCEL" } : item
+          item.id === action.payload ? { ...item, status: "CANCEL" } : item
         );
         break;
 

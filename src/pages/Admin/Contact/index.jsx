@@ -18,8 +18,6 @@ function Contact(props) {
     params,
     meta,
   } = useSelector((state) => state.contactReducer);
-  console.log("Contact  isLoading:", isLoading);
-
   const dispatch = useDispatch();
   const onGetList = (body) => dispatch(actionGetList(body));
   const onConfirm = (body) => dispatch(actionConfirm(body));

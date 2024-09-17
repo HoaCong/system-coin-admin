@@ -29,7 +29,7 @@ function* callApiConfirm({ params }) {
     const response = yield call(PUT, ENDPOINT.CONFIRM_CONTACT(params));
 
     if (response.status === 200) {
-      yield put(actionConfirmSuccess(response.data.data));
+      yield put(actionConfirmSuccess(params));
       yield put(
         addToast({
           text: response.data.message,

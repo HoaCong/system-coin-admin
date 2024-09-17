@@ -46,7 +46,9 @@ const historiesReducer = (state = initialState, action) => {
         draft.actionStatus.isLoading = false;
         draft.actionStatus.isSuccess = true;
         draft.list = state.list.map((item) =>
-          item.id === action.payload.id ? { ...item, ...action.payload } : item
+          item.id === action.payload
+            ? { ...item, status_order: "CANCEL" }
+            : item
         );
         break;
 
@@ -65,7 +67,9 @@ const historiesReducer = (state = initialState, action) => {
         draft.actionStatus.isLoading = false;
         draft.actionStatus.isSuccess = true;
         draft.list = state.list.map((item) =>
-          item.id === action.payload.id ? { ...item, ...action.payload } : item
+          item.id === action.payload
+            ? { ...item, status_order: "SUCCESS" }
+            : item
         );
         break;
 

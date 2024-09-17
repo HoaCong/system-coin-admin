@@ -49,7 +49,6 @@ function FormCoin({ data: { type, visible, info }, onClear }) {
 
   useEffect(() => {
     if (isSuccess) {
-      console.log("useEffect  isSuccess:", isSuccess);
       handleClose();
     }
   }, [isSuccess]);

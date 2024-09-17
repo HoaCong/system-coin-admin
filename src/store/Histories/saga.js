@@ -26,10 +26,10 @@ function* callApiList({ params }) {
 
 function* callApiCancel({ params }) {
   try {
-    const response = yield call(PUT, ENDPOINT.CANCEL_HISTORIES(params.id));
+    const response = yield call(PUT, ENDPOINT.CANCEL_HISTORIES(params));
 
     if (response.status === 200) {
-      yield put(actionCancelSuccess(response.data.data));
+      yield put(actionCancelSuccess(params));
       yield put(
         addToast({
           text: response.data.message,
@@ -61,10 +61,10 @@ function* callApiCancel({ params }) {
 
 function* callApiConfirm({ params }) {
   try {
-    const response = yield call(PUT, ENDPOINT.CONFIRM_HISTORIES(params.id));
+    const response = yield call(PUT, ENDPOINT.CONFIRM_HISTORIES(params));
 
     if (response.status === 200) {
-      yield put(actionConfirmSuccess(response.data.data));
+      yield put(actionConfirmSuccess(params));
       yield put(
         addToast({
           text: response.data.message,
