@@ -85,7 +85,7 @@ function Histories(props) {
   return (
     <div className="mb-5">
       <TemplateContent
-        title="Lịch sử giao dịch"
+        title="Danh sách giao dịch"
         filter={
           <div className="d-flex align-items-end gap-2">
             <div style={{ width: "100%", maxWidth: 250 }}>
@@ -170,10 +170,11 @@ function Histories(props) {
                 </th>
                 <td className="align-middle">
                   <LazyLoadImage
-                    src={item.type_coint === "PI_NETWORD" ? piImg : sidraImg}
+                    src={item.type_coin === "PI_NETWORD" ? piImg : sidraImg}
                     alt={item.sku}
                     width={50}
                     height={50}
+                    className="rounded-circle"
                   />
                 </td>
                 {tabKey === "BUY" && (
