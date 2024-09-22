@@ -13,9 +13,9 @@ import * as Yup from "yup";
 const validationSchema = Yup.object().shape({
   name: Yup.string().required("Tên coin là bắt buộc"),
   image: Yup.string().required("Image là bắt buộc"),
-  sodu: Yup.number().required("Số dư là bắt buộc"),
-  giamua: Yup.number().required("Giá mua là bắt buộc"),
-  giaban: Yup.number().required("Giá bán là bắt buộc"),
+  sodu: Yup.string().required("Số dư là bắt buộc"),
+  giamua: Yup.string().required("Giá mua là bắt buộc"),
+  giaban: Yup.string().required("Giá bán là bắt buộc"),
   address_pay: Yup.string().required("Địa chỉ mua là bắt buộc"),
 });
 

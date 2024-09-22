@@ -1,3 +1,4 @@
+import axios from "axios";
 import _random from "lodash/random";
 import _size from "lodash/size";
 
@@ -65,4 +66,68 @@ export const download = async (data, format) => {
     file.click();
   }
   document.body.removeChild(file);
+};
+
+export const checkTimeExpired = (timeExpired) => {
+  const now = new Date().getTime();
+  return now > timeExpired;
+};
+
+export const handleUploadImage = async (
+  event,
+  onSuccess = () => {},
+  onFailure = () => {}
+) => {
+  const selectedFile = event.target.files[0];
+  let accessToken = localStorage.getItem("token_upload");
+  let exprired = localStorage.getItem("expired_upload");
+  if (selectedFile) {
+    try {
+      // Step 1: Call the login API to get the access_token
+      if (!accessToken || checkTimeExpired(exprired)) {
+        const loginResponse = await axios.post(
+          "https://app.mento.vn/api/v1/guest/sessions",
+          {
+            email: process.env.REACT_APP_USERNAME,
+            password: process.env.REACT_APP_PASSWORD,
+          }
+        );
+
+        accessToken = loginResponse.data.token;
+        localStorage.setItem("token_upload", accessToken);
+        localStorage.setItem(
+          "expired_upload",
+          new Date().getTime() + 3600 * 1000 * 24 * 30 // 30 day
+        );
+      }
+
+      if (accessToken) {
+        // Step 2: Prepare the image for upload
+        const formData = new FormData();
+        formData.append("images[]", selectedFile);
+
+        // Step 3: Call the image upload API with the access_token in the headers
+        const uploadResponse = await axios.post(
+          "https://app.mento.vn/api/v1/images",
+          formData,
+          {
+            headers: {
+              "Content-Type": "image/jpeg",
+              Authorization: `Bearer ${accessToken}`,
+            },
+          }
+        );
+
+        const url = uploadResponse?.data[0].photo?.url;
+        onSuccess(url);
+      }
+    } catch (error) {
+      localStorage.removeItem("token_upload");
+      localStorage.removeItem("expired_upload");
+      event.target.value = "";
+      onFailure(error);
+    } finally {
+      // setIsUploading(false);
+    }
+  }
 };
