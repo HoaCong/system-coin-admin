@@ -12,6 +12,7 @@ function ModalBlock(props) {
     hideSave = false,
     propsModal,
     loading,
+    propsBtnSave = {},
   } = props;
 
   return (
@@ -27,7 +28,12 @@ function ModalBlock(props) {
               Hủy
             </Button>
             {!hideSave && (
-              <Button variant="primary" disabled={loading} onClick={onSave}>
+              <Button
+                variant="primary"
+                disabled={loading}
+                onClick={onSave}
+                {...propsBtnSave}
+              >
                 {loading && (
                   <Spinner
                     as="span"

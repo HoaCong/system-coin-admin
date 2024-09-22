@@ -44,6 +44,7 @@ const methodPaymentReducer = (state = initialState, action) => {
       case ActionTypes.UPDATE_SUCCESS:
         draft.actionStatus.isLoading = false;
         draft.actionStatus.isSuccess = true;
+        draft.info = action.payload;
         break;
 
       case ActionTypes.UPDATE_FAILED:

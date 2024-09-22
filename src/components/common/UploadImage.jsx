@@ -24,6 +24,7 @@ function UploadImage({
   size = { width: 150, height: 150 },
   classImage = "",
   showUpload = false,
+  idInputUpload = "uploadImage",
 }) {
   const [file, setFile] = useState();
   const [isUploading, setIsUploading] = useState(false);
@@ -134,7 +135,7 @@ function UploadImage({
       {showUpload && (
         <div>
           <label
-            htmlFor="uploadImage"
+            htmlFor={idInputUpload}
             className={`btn btn-outline-secondary mt-3 ${
               isUploading && "pe-none"
             }`}
@@ -153,7 +154,7 @@ function UploadImage({
         </div>
       )}
       <input
-        id="uploadImage"
+        id={idInputUpload}
         type="file"
         accept="image/*"
         multiple
