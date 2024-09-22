@@ -1,22 +1,22 @@
 import { ROUTES } from "./routerWeb";
 
 export const MENU_ADMIN = [
+  // {
+  //   label: "Dashboard",
+  //   active: false,
+  //   src: ROUTES.ADMIN_DASHBOARD,
+  //   icon: <i className="fas fa-home"></i>,
+  // },
   {
-    label: "Dashboard",
+    label: "Danh sách giao dịch",
     active: false,
-    src: ROUTES.ADMIN_DASHBOARD,
-    icon: <i className="fas fa-home"></i>,
+    src: ROUTES.ADMIN_HISTORIES,
+    icon: <i className="fas fa-users"></i>,
   },
   {
     label: "Coin",
     active: false,
     src: ROUTES.ADMIN_COIN,
-    icon: <i className="fas fa-users"></i>,
-  },
-  {
-    label: "Danh sách giao dịch",
-    active: false,
-    src: ROUTES.ADMIN_HISTORIES,
     icon: <i className="fas fa-users"></i>,
   },
   {
@@ -47,6 +47,12 @@ export const MENU_ADMIN = [
     label: "Danh sách liên hệ",
     active: false,
     src: ROUTES.ADMIN_CONTACT,
+    icon: <i className="fas fa-users"></i>,
+  },
+  {
+    label: "Phương thức thanh toán",
+    active: false,
+    src: ROUTES.ADMIN_METHOD_PAYMENT,
     icon: <i className="fas fa-users"></i>,
   },
 ];

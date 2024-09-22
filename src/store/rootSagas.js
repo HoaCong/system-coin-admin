@@ -8,6 +8,7 @@ import employeeSaga from "./Employee/saga";
 import guireSaga from "./Guire/saga";
 import historiesSaga from "./Histories/saga";
 import loginSaga from "./Login/saga";
+import methodPaymentSaga from "./MethodPayment/saga";
 import newsSaga from "./News/saga";
 export default function* rootSaga() {
   yield all([
@@ -20,5 +21,6 @@ export default function* rootSaga() {
     fork(customerSaga),
     fork(historiesSaga),
     fork(contactSaga),
+    fork(methodPaymentSaga),
   ]);
 }

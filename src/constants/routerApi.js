@@ -41,5 +41,6 @@ export const ENDPOINT = {
   // ======api/contact======
   LIST_CONTACT: "api/contact",
   CONFIRM_CONTACT: (id) => `api/submitcontact/${id}`,
-  CANCEL_CONTACT: (id) => `api/order-coins/${id}`,
+  // ======api/contact======
+  SETTING: "api/setting",
 };

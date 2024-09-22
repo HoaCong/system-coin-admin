@@ -14,4 +14,5 @@ export const ROUTES = {
   ADMIN_CUSTOMER: "/admin/customer",
   ADMIN_CUSTOMER_DETAIL: "/admin/customer/detail",
   ADMIN_CONTACT: "/admin/contact",
+  ADMIN_METHOD_PAYMENT: "/admin/method-payment",
 };
