@@ -34,7 +34,7 @@ function Histories(props) {
   const onResetData = () => dispatch(resetData());
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [query, setQuery] = useState("");
+  const [sku, setQuery] = useState("");
   const [tabKey, setTabKey] = useState("BUY"); // State for the active tab
   const [tooltip, setTooltip] = useState({
     target: null,
@@ -44,7 +44,7 @@ function Histories(props) {
   });
 
   useEffect(() => {
-    if (!isLoading) onGetList({ ...params, limit: 10, page: 1, type: tabKey }); // Include the selected tab type in the query
+    if (!isLoading) onGetList({ ...params, limit: 10, page: 1, type: tabKey }); // Include the selected tab type in the sku
     return () => {
       onResetData();
     };
@@ -76,8 +76,8 @@ function Histories(props) {
   };
 
   const handleSearch = (type) => {
-    const tmpQuery = !query || type === "reset" ? null : query.trim();
-    onGetList({ ...params, page: 1, query: tmpQuery, type: tabKey });
+    const tmpQuery = !sku || type === "reset" ? null : sku.trim();
+    onGetList({ ...params, page: 1, sku: tmpQuery, type: tabKey });
     setCurrentPage(1);
     if (type === "reset") setQuery("");
   };
@@ -94,8 +94,8 @@ function Histories(props) {
                 id="search"
                 aria-label="Tìm kiếm"
                 placeholder="Tìm kiếm theo sku"
-                name="query"
-                value={query}
+                name="sku"
+                value={sku}
                 onChange={(e) => {
                   setQuery(e.target.value);
                 }}
@@ -126,6 +126,7 @@ function Histories(props) {
         >
           <Tab eventKey="BUY" title="Khách Mua"></Tab>
           <Tab eventKey="SELL" title="Khách Bán"></Tab>
+          <Tab eventKey="SELL_HOT" title="Khách Bán Nóng"></Tab>
         </Tabs>
 
         <table className="table table-hover table-striped">
@@ -133,15 +134,18 @@ function Histories(props) {
             <tr>
               <th scope="col">#</th>
               <th scope="col">Loại coin</th>
-              {tabKey === "BUY" && <th scope="col">Ảnh bill</th>}
+              {["BUY", "SELL_HOT"].includes(tabKey) && (
+                <th scope="col">Ảnh bill</th>
+              )}
               <th scope="col">Mã SKU</th>
               <th scope="col">Khách hàng</th>
               <th scope="col">Số lượng coin</th>
               <th scope="col">Giá coin</th>
               <th scope="col">Tổng tiền</th>
-              {tabKey === "BUY" ? (
-                <th scope="col">Ví thanh toán</th>
-              ) : (
+              {["BUY", "SELL_HOT"].includes(tabKey) && (
+                <th scope="col">Ví chủ shop</th>
+              )}
+              {["SELL", "SELL_HOT"].includes(tabKey) && (
                 <th scope="col">Thông tin</th>
               )}
               <th scope="col">Trạng thái</th>
@@ -177,7 +181,7 @@ function Histories(props) {
                     className="rounded-circle"
                   />
                 </td>
-                {tabKey === "BUY" && (
+                {["BUY", "SELL_HOT"].includes(tabKey) && (
                   <td className="align-middle">
                     <LazyLoadImage
                       src={item.image_bill}
@@ -217,9 +221,10 @@ function Histories(props) {
                     </span>
                   )}
                 </td>
-                {tabKey === "BUY" ? (
+                {["BUY", "SELL_HOT"].includes(tabKey) && (
                   <td className="align-middle">{item?.wallet_coin}</td>
-                ) : (
+                )}
+                {["SELL", "SELL_HOT"].includes(tabKey) && (
                   <td className="align-middle">
                     <div>{item?.stk_bank}</div>
                     <div>{item?.stk}</div>
