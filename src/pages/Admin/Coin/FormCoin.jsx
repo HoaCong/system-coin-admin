@@ -114,7 +114,9 @@ function FormCoin({ data: { type, visible, info }, onClear }) {
                 displayType={"input"}
                 className="form-control shadow-none"
                 value={formik.values.sodu || ""}
-                onChange={formik.handleChange}
+                onValueChange={({ floatValue }) =>
+                  formik.setFieldValue("sodu", floatValue)
+                }
                 disabled={type === "detail"}
                 thousandSeparator=","
               />
@@ -140,7 +142,9 @@ function FormCoin({ data: { type, visible, info }, onClear }) {
                 displayType={"input"}
                 className="form-control shadow-none"
                 value={formik.values.giamua || ""}
-                onChange={formik.handleChange}
+                onValueChange={({ floatValue }) =>
+                  formik.setFieldValue("giamua", floatValue)
+                }
                 thousandSeparator=","
               />
               {formik.touched.giamua && formik.errors.giamua ? (
@@ -162,7 +166,9 @@ function FormCoin({ data: { type, visible, info }, onClear }) {
                 displayType={"input"}
                 className="form-control shadow-none"
                 value={formik.values.giaban || ""}
-                onChange={formik.handleChange}
+                onValueChange={({ floatValue }) =>
+                  formik.setFieldValue("giaban", floatValue)
+                }
                 thousandSeparator=","
               />
               {formik.touched.giaban && formik.errors.giaban ? (
