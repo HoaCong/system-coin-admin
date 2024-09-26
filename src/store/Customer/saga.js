@@ -44,7 +44,7 @@ function* callApiAdd({ params }) {
       yield put(actionAddFailed());
       yield put(
         addToast({
-          text: "Add customer failed",
+          text: "Thêm khách hàng thất bại",
           type: "danger",
           title: "",
         })
@@ -54,7 +54,7 @@ function* callApiAdd({ params }) {
     yield put(actionAddFailed(error.response.data.error));
     yield put(
       addToast({
-        text: "Add customer failed",
+        text: "Thêm khách hàng thất bại",
         type: "danger",
         title: "",
       })
@@ -87,7 +87,7 @@ function* callApiEdit({ params }) {
       yield put(actionEditFailed());
       yield put(
         addToast({
-          text: "Update customer failed",
+          text: "Cập nhật khách hàng thất bại",
           type: "danger",
           title: "",
         })
@@ -97,7 +97,7 @@ function* callApiEdit({ params }) {
     yield put(actionEditFailed(error.response.data.error));
     yield put(
       addToast({
-        text: "Update customer failed",
+        text: "Cập nhật khách hàng thất bại",
         type: "danger",
         title: "",
       })
@@ -121,7 +121,7 @@ function* callApiDelete({ id }) {
       yield put(actionDeleteFailed());
       yield put(
         addToast({
-          text: "Update customer failed",
+          text: "Xoá khách hàng thất bại",
           type: "danger",
           title: "",
         })
@@ -131,7 +131,7 @@ function* callApiDelete({ id }) {
     yield put(actionDeleteFailed(error.response.data.error));
     yield put(
       addToast({
-        text: "Update customer failed",
+        text: "Xoá khách hàng thất bại",
         type: "danger",
         title: "",
       })
@@ -152,7 +152,7 @@ function* callApiDetail({ id }) {
   }
 }
 
-function* callApơUpdateDetail({ params }) {
+function* callApiUpdateDetail({ params }) {
   try {
     const { id } = params;
     const response = yield call(
@@ -174,7 +174,7 @@ function* callApơUpdateDetail({ params }) {
       yield put(actionEditFailed());
       yield put(
         addToast({
-          text: "Update customer failed",
+          text: "Cập nhật khách hàng thất bại",
           type: "danger",
           title: "",
         })
@@ -184,7 +184,7 @@ function* callApơUpdateDetail({ params }) {
     yield put(actionEditFailed(error.response.data.error));
     yield put(
       addToast({
-        text: "Update customer failed",
+        text: "Cập nhật khách hàng thất bại",
         type: "danger",
         title: "",
       })
@@ -199,6 +199,6 @@ export default function* customerSaga() {
     yield takeLatest(ActionTypes.EDIT, callApiEdit),
     yield takeLatest(ActionTypes.DELETE, callApiDelete),
     yield takeLeading(ActionTypes.DETAIL, callApiDetail),
-    yield takeLatest(ActionTypes.UPDATE, callApơUpdateDetail),
+    yield takeLatest(ActionTypes.UPDATE, callApiUpdateDetail),
   ]);
 }

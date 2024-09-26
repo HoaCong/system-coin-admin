@@ -61,7 +61,7 @@ function* callApiAdd({ params }) {
       yield put(actionAddFailed());
       yield put(
         addToast({
-          text: response.message || "Add employee failed",
+          text: response.message || "Thêm nhân viên thất bại",
           type: "danger",
           title: "",
         })
@@ -82,7 +82,7 @@ function* callApiAdd({ params }) {
     yield put(actionAddFailed(error.response.data.error));
     yield put(
       addToast({
-        text: "Add employee failed",
+        text: "Thêm nhân viên thất bại",
         type: "danger",
         title: "",
       })
@@ -108,7 +108,7 @@ function* callApiEdit({ params }) {
       yield put(actionEditFailed());
       yield put(
         addToast({
-          text: "Update employee failed",
+          text: "Cập nhật nhân viên thất bại",
           type: "danger",
           title: "",
         })
@@ -129,7 +129,7 @@ function* callApiEdit({ params }) {
     yield put(actionEditFailed(error.response.data.error));
     yield put(
       addToast({
-        text: "Update employee failed",
+        text: "Cập nhật nhân viên thất bại",
         type: "danger",
         title: "",
       })
@@ -153,7 +153,7 @@ function* callApiChangeActive({ id }) {
       yield put(actionChangeActiveFailed());
       yield put(
         addToast({
-          text: "Update employee failed",
+          text: "Cập nhật nhân viên thất bại",
           type: "danger",
           title: "",
         })
@@ -174,7 +174,7 @@ function* callApiChangeActive({ id }) {
     yield put(actionDeleteFailed(error.response.data.error));
     yield put(
       addToast({
-        text: "Update employee failed",
+        text: "Cập nhật nhân viên thất bại",
         type: "danger",
         title: "",
       })
@@ -198,7 +198,7 @@ function* callApiDelete({ id }) {
       yield put(actionDeleteFailed());
       yield put(
         addToast({
-          text: "Update employee failed",
+          text: "Xoá nhân viên thất bại",
           type: "danger",
           title: "",
         })
@@ -219,7 +219,7 @@ function* callApiDelete({ id }) {
     yield put(actionDeleteFailed(error.response.data.error));
     yield put(
       addToast({
-        text: "Update employee failed",
+        text: "Xoá nhân viên thất bại",
         type: "danger",
         title: "",
       })
@@ -273,7 +273,7 @@ function* callApiUpdateDetail({ params }) {
       yield put(actionEditFailed());
       yield put(
         addToast({
-          text: "Update employee failed",
+          text: "Cập nhật nhân viên thất bại",
           type: "danger",
           title: "",
         })
@@ -294,7 +294,7 @@ function* callApiUpdateDetail({ params }) {
     yield put(actionEditFailed(error.response.data.error));
     yield put(
       addToast({
-        text: "Update employee failed",
+        text: "Cập nhật nhân viên thất bại",
         type: "danger",
         title: "",
       })

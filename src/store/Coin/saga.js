@@ -43,7 +43,7 @@ function* callApiAdd({ params }) {
       yield put(actionAddFailed());
       yield put(
         addToast({
-          text: "Add coin failed",
+          text: "Thêm coin thất bại",
           type: "danger",
           title: "",
         })
@@ -53,7 +53,7 @@ function* callApiAdd({ params }) {
     yield put(actionAddFailed(error.response.data.error));
     yield put(
       addToast({
-        text: "Add coin failed",
+        text: "Thêm coin thất bại",
         type: "danger",
         title: "",
       })
@@ -86,7 +86,7 @@ function* callApiEdit({ params }) {
       yield put(actionEditFailed());
       yield put(
         addToast({
-          text: "Update news failed",
+          text: "Cập nhật coin thất bại",
           type: "danger",
           title: "",
         })
@@ -96,7 +96,7 @@ function* callApiEdit({ params }) {
     yield put(actionEditFailed(error.response.data.error));
     yield put(
       addToast({
-        text: "Update news failed",
+        text: "Cập nhật coin thất bại",
         type: "danger",
         title: "",
       })
@@ -120,7 +120,7 @@ function* callApiDelete({ id }) {
       yield put(actionDeleteFailed());
       yield put(
         addToast({
-          text: "Update news failed",
+          text: "Xoá coin thất bại",
           type: "danger",
           title: "",
         })
@@ -130,7 +130,7 @@ function* callApiDelete({ id }) {
     yield put(actionDeleteFailed(error.response.data.error));
     yield put(
       addToast({
-        text: "Update news failed",
+        text: "Xoá coin thất bại",
         type: "danger",
         title: "",
       })
