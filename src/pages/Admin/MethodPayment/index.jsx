@@ -155,6 +155,9 @@ function MethodPayment(props) {
                     Ngân hàng
                   </th>
                   <th scope="col" className="align-middle">
+                    Chủ thẻ
+                  </th>
+                  <th scope="col" className="align-middle">
                     Số tài khoản
                   </th>
                   <th scope="col" className="align-middle">
@@ -206,6 +209,7 @@ function MethodPayment(props) {
                       />
                     </td>
                     <td className="align-middle">{item.bank_name}</td>
+                    <td className="align-middle">{item.bank_owner}</td>
                     <td className="align-middle">{item.bank_number}</td>
                     <td className="align-middle">
                       <ActionTable

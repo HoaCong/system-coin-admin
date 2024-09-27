@@ -12,6 +12,7 @@ const initialData = {
   logo_bank: "",
   qrcode: "",
   bank_name: "",
+  bank_owner: "",
   bank_number: "",
 };
 
@@ -32,6 +33,7 @@ function FormPayment({
       logo_bank: Yup.string().required("Vui lòng tải lên logo ngân hàng"),
       qrcode: Yup.string().required("Vui lòng tải lên qrcode"),
       bank_name: Yup.string().required("Vui lòng nhập tên ngân hàng"),
+      bank_owner: Yup.string().required("Vui lòng nhập tên chủ thẻ"),
       bank_number: Yup.string().required("Vui lòng nhập số tài khoản"),
     }),
     onSubmit: (values) => {
@@ -84,7 +86,7 @@ function FormPayment({
       propsModal={{ size: "lg" }}
     >
       <Form className="row">
-        <Form.Group className="col-6">
+        <Form.Group className="col-4">
           <Form.Label htmlFor="bank_name">
             Tên ngân hàng <span className="required">*</span>
           </Form.Label>
@@ -100,8 +102,24 @@ function FormPayment({
             {formik.errors.bank_name}
           </Form.Control.Feedback>
         </Form.Group>
+        <Form.Group className="col-4">
+          <Form.Label htmlFor="bank_owner">
+            Tên chủ thẻ <span className="required">*</span>
+          </Form.Label>
+          <Form.Control
+            id="bank_owner"
+            name="bank_owner"
+            value={formik.values.bank_owner}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            isInvalid={formik.touched.bank_owner && !!formik.errors.bank_owner}
+          />
+          <Form.Control.Feedback type="invalid">
+            {formik.errors.bank_owner}
+          </Form.Control.Feedback>
+        </Form.Group>
 
-        <Form.Group className="col-6">
+        <Form.Group className="col-4">
           <Form.Label htmlFor="bank_number">
             Số tài khoản ngân hàng <span className="required">*</span>
           </Form.Label>
