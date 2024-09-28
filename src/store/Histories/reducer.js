@@ -36,6 +36,26 @@ const historiesReducer = (state = initialState, action) => {
         draft.list = [];
         break;
 
+      case ActionTypes.LIST_DETAIL:
+        draft.listStatus.isLoading = true;
+        draft.listStatus.isSuccess = false;
+        draft.listStatus.isFailure = false;
+        draft.params.page = action.params.page;
+        break;
+
+      case ActionTypes.LIST_DETAIL_SUCCESS:
+        draft.listStatus.isLoading = false;
+        draft.listStatus.isSuccess = true;
+        draft.list = action.payload.data;
+        draft.meta.total = action.payload.total;
+        break;
+
+      case ActionTypes.LIST_DETAIL_FAILED:
+        draft.listStatus.isLoading = false;
+        draft.listStatus.isFailure = true;
+        draft.list = [];
+        break;
+
       case ActionTypes.CANCEL:
         draft.actionStatus.isLoading = true;
         draft.actionStatus.isSuccess = false;

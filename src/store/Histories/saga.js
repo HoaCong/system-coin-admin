@@ -1,5 +1,5 @@
 import { ENDPOINT } from "constants/routerApi";
-import { DELETE, GET, POST, PUT } from "helper/ajax";
+import { GET, PUT } from "helper/ajax";
 import { all, call, put, takeLatest, takeLeading } from "redux-saga/effects";
 import { addToast } from "store/Toast/action";
 import {
@@ -7,6 +7,8 @@ import {
   actionCancelSuccess,
   actionConfirmFailed,
   actionConfirmSuccess,
+  actionGetListDetailFailed,
+  actionGetListDetailSuccess,
   actionGetListFailed,
   actionGetListSuccess,
 } from "./action";
@@ -21,6 +23,19 @@ function* callApiList({ params }) {
     }
   } catch (error) {
     yield put(actionGetListFailed(error.response.data.error));
+  }
+}
+
+function* callApiListDetail({ params }) {
+  try {
+    const response = yield call(GET, ENDPOINT.LIST_HISTORIES_DETAIL, params);
+    if (response.status === 200) {
+      yield put(actionGetListDetailSuccess(response.data));
+    } else {
+      yield put(actionGetListDetailFailed());
+    }
+  } catch (error) {
+    yield put(actionGetListDetailFailed(error.response.data.error));
   }
 }
 
@@ -97,6 +112,7 @@ function* callApiConfirm({ params }) {
 export default function* historiesSaga() {
   yield all([
     yield takeLeading(ActionTypes.LIST, callApiList),
+    yield takeLeading(ActionTypes.LIST_DETAIL, callApiListDetail),
     yield takeLatest(ActionTypes.CANCEL, callApiCancel),
     yield takeLatest(ActionTypes.CONFIRM, callApiConfirm),
   ]);

@@ -7,7 +7,9 @@ import AdminCustomer from "pages/Admin/Customer";
 import AdminEmployee from "pages/Admin/Employee";
 import AdminGuire from "pages/Admin/Guire";
 import AdminHistories from "pages/Admin/Histories";
+import AdminHistoriesDetail from "pages/Admin/HistoriesDetail";
 import AdminHistoriesWithdraw from "pages/Admin/HistoriesWithdraw";
+import AdminHistoriesWithdrawDetail from "pages/Admin/HistoriesWithdrawDetail";
 import AdminMethodPayment from "pages/Admin/MethodPayment";
 import AdminNews from "pages/Admin/News";
 import Login from "pages/Login";
@@ -50,6 +52,16 @@ export const adminRoutes = [
         path: ROUTES.ADMIN_HISTORIES_WITHDRAW,
         name: "Histories Withdraw Page",
         element: <AdminHistoriesWithdraw />,
+      },
+      {
+        path: ROUTES.ADMIN_HISTORIES_DETAIL,
+        name: "Histories Detail Page",
+        element: <AdminHistoriesDetail />,
+      },
+      {
+        path: ROUTES.ADMIN_HISTORIES_WITHDRAW_DETAIL,
+        name: "Histories Withdraw Detail Page",
+        element: <AdminHistoriesWithdrawDetail />,
       },
       {
         path: ROUTES.ADMIN_NEWS,

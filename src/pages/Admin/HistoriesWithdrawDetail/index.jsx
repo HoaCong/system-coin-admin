@@ -4,23 +4,21 @@ import LazyLoadImage from "components/common/LazyLoadImage";
 import LinearProgress from "components/common/LinearProgress";
 import TemplateContent from "components/layout/TemplateContent";
 import { STATUS_LABEL } from "constants";
-import { ROUTES } from "constants/routerWeb";
 import { format } from "date-fns";
-import { parserRouter } from "helper/functions";
 import _size from "lodash/size";
 import { useEffect, useState } from "react";
 import { Badge, Button, Form, Spinner } from "react-bootstrap"; // Import Tabs and Tab from react-bootstrap
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import {
   actionCancel,
   actionConfirm,
-  actionGetList,
+  actionGetListDetail,
   resetData,
 } from "store/HistoriesWithDraw/action";
 import piImg from "../../../assets/images/pi.jpg";
 import sidraImg from "../../../assets/images/sidra.png";
-function HistoriesWithdraw(props) {
+function HistoriesWithdrawDetail(props) {
   const {
     listStatus: { isLoading, isSuccess, isFailure },
     actionStatus: { isLoading: actionLoading, isSuccess: actionSuccess },
@@ -30,11 +28,12 @@ function HistoriesWithdraw(props) {
   } = useSelector((state) => state.withdrawReducer);
 
   const dispatch = useDispatch();
-  const onGetList = (body) => dispatch(actionGetList(body));
+  const onGetList = (body) => dispatch(actionGetListDetail(body));
   const onConfirm = (body) => dispatch(actionConfirm(body));
   const onCancel = (body) => dispatch(actionCancel(body));
   const onResetData = () => dispatch(resetData());
 
+  const { id } = useParams();
   const [currentPage, setCurrentPage] = useState(1);
   const [sku, setQuery] = useState("");
   const [tooltip, setTooltip] = useState({
@@ -45,7 +44,8 @@ function HistoriesWithdraw(props) {
   });
 
   useEffect(() => {
-    if (!isLoading) onGetList({ ...params, limit: 10, page: 1 }); // Include the selected tab type in the sku
+    if (!isLoading)
+      onGetList({ ...params, limit: 10, page: 1, customerId: id }); // Include the selected tab type in the sku
     return () => {
       onResetData();
     };
@@ -57,7 +57,7 @@ function HistoriesWithdraw(props) {
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
-    onGetList({ ...params, page });
+    onGetList({ ...params, page, customerId: id });
   };
 
   const onCloseTooltip = () => {
@@ -78,7 +78,7 @@ function HistoriesWithdraw(props) {
 
   const handleSearch = (type) => {
     const tmpQuery = !sku || type === "reset" ? null : sku.trim();
-    onGetList({ ...params, page: 1, sku: tmpQuery });
+    onGetList({ ...params, page: 1, sku: tmpQuery, customerId: id });
     setCurrentPage(1);
     if (type === "reset") setQuery("");
   };
@@ -86,7 +86,7 @@ function HistoriesWithdraw(props) {
   return (
     <div className="mb-5">
       <TemplateContent
-        title="Danh sách giao dịch"
+        title="Danh sách giao dịch của 1 khách hàng"
         filter={
           <div className="d-flex align-items-end gap-2">
             <div style={{ width: "100%", maxWidth: 250 }}>
@@ -165,16 +165,9 @@ function HistoriesWithdraw(props) {
                   <div>{format(item?.createdAt, "MM:ss dd-MM-yyyy")}</div>
                 </td>
                 <td className="align-middle">
-                  <Link
-                    to={parserRouter(
-                      ROUTES.ADMIN_HISTORIES_WITHDRAW_DETAIL,
-                      item?.Customer.id
-                    )}
-                  >
-                    <b>{item?.Customer.full_name}</b>
-                  </Link>
-                  <div>{item?.Customer.email}</div>
-                  <div>{item?.Customer.phone}</div>
+                  <b>{item?.Customer?.full_name}</b>
+                  <div>{item?.Customer?.email}</div>
+                  <div>{item?.Customer?.phone}</div>
                 </td>
                 <td className="align-middle">{item?.count_coin}</td>
                 <td className="align-middle">{item?.wallet_coin}</td>
@@ -268,4 +261,4 @@ function HistoriesWithdraw(props) {
   );
 }
 
-export default HistoriesWithdraw;
+export default HistoriesWithdrawDetail;

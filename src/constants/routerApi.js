@@ -35,9 +35,11 @@ export const ENDPOINT = {
   DETAIL_CUSTOMER: "api/customer/",
   UPDATE_DETAIL_CUSTOMER: "api/customer/detail/",
   // ======api/histoties======
+  LIST_HISTORIES_DETAIL: "api/order-coins",
   LIST_HISTORIES: "api/admin/order-coins",
   CONFIRM_HISTORIES: (id) => `api/order-coins/submit/${id}`,
   CANCEL_HISTORIES: (id) => `api/order-coins/cancel/${id}`,
+  LIST_HISTORIES_WITHDRAW_DETAIL: "api/order-draw",
   LIST_HISTORIES_WITHDRAW: "api/admin/order-draw",
   CONFIRM_HISTORIES_WITHDRAW: (id) => `api/order-draw/submit/${id}`,
   CANCEL_HISTORIES_WITHDRAW: (id) => `api/order-draw/cancel/${id}`,

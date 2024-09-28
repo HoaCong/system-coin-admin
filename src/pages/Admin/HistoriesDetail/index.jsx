@@ -4,39 +4,40 @@ import LazyLoadImage from "components/common/LazyLoadImage";
 import LinearProgress from "components/common/LinearProgress";
 import TemplateContent from "components/layout/TemplateContent";
 import { STATUS_LABEL } from "constants";
-import { ROUTES } from "constants/routerWeb";
 import { format } from "date-fns";
-import { parserRouter } from "helper/functions";
+import { formatCurrency } from "helper/functions";
 import _size from "lodash/size";
 import { useEffect, useState } from "react";
-import { Badge, Button, Form, Spinner } from "react-bootstrap"; // Import Tabs and Tab from react-bootstrap
+import { Badge, Button, Form, Spinner, Tab, Tabs } from "react-bootstrap"; // Import Tabs and Tab from react-bootstrap
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import {
   actionCancel,
   actionConfirm,
-  actionGetList,
+  actionGetListDetail,
   resetData,
-} from "store/HistoriesWithDraw/action";
+} from "store/Histories/action";
 import piImg from "../../../assets/images/pi.jpg";
 import sidraImg from "../../../assets/images/sidra.png";
-function HistoriesWithdraw(props) {
+function HistoriesDetail(props) {
   const {
     listStatus: { isLoading, isSuccess, isFailure },
     actionStatus: { isLoading: actionLoading, isSuccess: actionSuccess },
     list,
     params,
     meta,
-  } = useSelector((state) => state.withdrawReducer);
+  } = useSelector((state) => state.historiesReducer);
 
   const dispatch = useDispatch();
-  const onGetList = (body) => dispatch(actionGetList(body));
+  const onGetList = (body) => dispatch(actionGetListDetail(body));
   const onConfirm = (body) => dispatch(actionConfirm(body));
   const onCancel = (body) => dispatch(actionCancel(body));
   const onResetData = () => dispatch(resetData());
 
+  const { id } = useParams();
   const [currentPage, setCurrentPage] = useState(1);
   const [sku, setQuery] = useState("");
+  const [tabKey, setTabKey] = useState("BUY"); // State for the active tab
   const [tooltip, setTooltip] = useState({
     target: null,
     visible: false,
@@ -45,11 +46,18 @@ function HistoriesWithdraw(props) {
   });
 
   useEffect(() => {
-    if (!isLoading) onGetList({ ...params, limit: 10, page: 1 }); // Include the selected tab type in the sku
+    if (!isLoading)
+      onGetList({
+        ...params,
+        limit: 10,
+        page: 1,
+        type: tabKey,
+        customerId: id,
+      }); // Include the selected tab type in the sku
     return () => {
       onResetData();
     };
-  }, []); // Fetch data when tab changes
+  }, [tabKey]); // Fetch data when tab changes
 
   useEffect(() => {
     if (actionSuccess) onCloseTooltip();
@@ -57,7 +65,7 @@ function HistoriesWithdraw(props) {
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
-    onGetList({ ...params, page });
+    onGetList({ ...params, page, type: tabKey, customerId: id });
   };
 
   const onCloseTooltip = () => {
@@ -78,7 +86,13 @@ function HistoriesWithdraw(props) {
 
   const handleSearch = (type) => {
     const tmpQuery = !sku || type === "reset" ? null : sku.trim();
-    onGetList({ ...params, page: 1, sku: tmpQuery });
+    onGetList({
+      ...params,
+      page: 1,
+      sku: tmpQuery,
+      type: tabKey,
+      customerId: id,
+    });
     setCurrentPage(1);
     if (type === "reset") setQuery("");
   };
@@ -86,7 +100,7 @@ function HistoriesWithdraw(props) {
   return (
     <div className="mb-5">
       <TemplateContent
-        title="Danh sách giao dịch"
+        title="Danh sách giao dịch của 1 khách hàng"
         filter={
           <div className="d-flex align-items-end gap-2">
             <div style={{ width: "100%", maxWidth: 250 }}>
@@ -118,15 +132,37 @@ function HistoriesWithdraw(props) {
           </div>
         }
       >
+        {/* Tabs for switching between BUY and SELL */}
+        <Tabs
+          id="controlled-tab"
+          activeKey={tabKey}
+          onSelect={(k) => setTabKey(k)}
+          className="mb-3"
+        >
+          <Tab eventKey="BUY" title="Khách Mua"></Tab>
+          <Tab eventKey="SELL" title="Khách Bán"></Tab>
+          <Tab eventKey="SELL_HOT" title="Khách Bán Nóng"></Tab>
+        </Tabs>
+
         <table className="table table-hover table-striped">
           <thead>
             <tr>
               <th scope="col">#</th>
               <th scope="col">Loại coin</th>
+              {["BUY", "SELL_HOT"].includes(tabKey) && (
+                <th scope="col">Ảnh bill</th>
+              )}
               <th scope="col">Mã SKU</th>
               <th scope="col">Khách hàng</th>
               <th scope="col">Số lượng coin</th>
-              <th scope="col">Ví coin</th>
+              <th scope="col">Giá coin</th>
+              <th scope="col">Tổng tiền</th>
+              {["BUY", "SELL_HOT"].includes(tabKey) && (
+                <th scope="col">Ví chủ shop</th>
+              )}
+              {["SELL", "SELL_HOT"].includes(tabKey) && (
+                <th scope="col">Thông tin</th>
+              )}
               <th scope="col">Trạng thái</th>
               <th scope="col">Hành động</th>
             </tr>
@@ -160,24 +196,56 @@ function HistoriesWithdraw(props) {
                     className="rounded-circle"
                   />
                 </td>
+                {["BUY", "SELL_HOT"].includes(tabKey) && (
+                  <td className="align-middle">
+                    <LazyLoadImage
+                      src={item.image_bill}
+                      alt={item.sku}
+                      width={50}
+                      height={50}
+                    />
+                  </td>
+                )}
                 <td className="align-middle">
                   <b>{item?.sku}</b>
                   <div>{format(item?.createdAt, "MM:ss dd-MM-yyyy")}</div>
                 </td>
                 <td className="align-middle">
-                  <Link
-                    to={parserRouter(
-                      ROUTES.ADMIN_HISTORIES_WITHDRAW_DETAIL,
-                      item?.Customer.id
-                    )}
-                  >
-                    <b>{item?.Customer.full_name}</b>
-                  </Link>
+                  <b>{item?.Customer.full_name}</b>
                   <div>{item?.Customer.email}</div>
                   <div>{item?.Customer.phone}</div>
                 </td>
-                <td className="align-middle">{item?.count_coin}</td>
-                <td className="align-middle">{item?.wallet_coin}</td>
+                <td className="align-middle">
+                  {tabKey === "BUY" ? (
+                    <span className="text-danger"> -{item?.count_coin}</span>
+                  ) : (
+                    <span className="text-success"> +{item?.count_coin}</span>
+                  )}
+                </td>
+                <td className="align-middle">
+                  {formatCurrency(item?.price_coin_current)}
+                </td>
+                <td className="align-middle">
+                  {tabKey === "BUY" ? (
+                    <span className="text-success">
+                      +{formatCurrency(item?.total_money)}
+                    </span> // Add minus sign for BUY
+                  ) : (
+                    <span className="text-danger">
+                      -{formatCurrency(item?.total_money)}
+                    </span>
+                  )}
+                </td>
+                {["BUY", "SELL_HOT"].includes(tabKey) && (
+                  <td className="align-middle">{item?.wallet_coin}</td>
+                )}
+                {["SELL", "SELL_HOT"].includes(tabKey) && (
+                  <td className="align-middle">
+                    <div>{item?.stk_bank}</div>
+                    <div>{item?.stk}</div>
+                    <div>{item?.stk_name}</div>
+                  </td>
+                )}
                 <td className="align-middle">
                   <Badge
                     className="py-2 px-3"
@@ -268,4 +336,4 @@ function HistoriesWithdraw(props) {
   );
 }
 
-export default HistoriesWithdraw;
+export default HistoriesDetail;

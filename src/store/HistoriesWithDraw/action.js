@@ -15,6 +15,21 @@ export const actionGetListFailed = (error) => ({
   error,
 });
 
+export const actionGetListDetail = (params) => ({
+  type: ActionTypes.LIST_DETAIL,
+  params,
+});
+
+export const actionGetListDetailSuccess = (payload) => ({
+  type: ActionTypes.LIST_DETAIL_SUCCESS,
+  payload,
+});
+
+export const actionGetListDetailFailed = (error) => ({
+  type: ActionTypes.LIST_DETAIL_FAILED,
+  error,
+});
+
 export const actionCancel = (params) => ({
   type: ActionTypes.CANCEL,
   params,

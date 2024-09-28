@@ -4,12 +4,14 @@ import LazyLoadImage from "components/common/LazyLoadImage";
 import LinearProgress from "components/common/LinearProgress";
 import TemplateContent from "components/layout/TemplateContent";
 import { STATUS_LABEL } from "constants";
+import { ROUTES } from "constants/routerWeb";
 import { format } from "date-fns";
-import { formatCurrency } from "helper/functions";
+import { formatCurrency, parserRouter } from "helper/functions";
 import _size from "lodash/size";
 import { useEffect, useState } from "react";
 import { Badge, Button, Form, Spinner, Tab, Tabs } from "react-bootstrap"; // Import Tabs and Tab from react-bootstrap
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import {
   actionCancel,
   actionConfirm,
@@ -196,7 +198,14 @@ function Histories(props) {
                   <div>{format(item?.createdAt, "MM:ss dd-MM-yyyy")}</div>
                 </td>
                 <td className="align-middle">
-                  <b>{item?.Customer.full_name}</b>
+                  <Link
+                    to={parserRouter(
+                      ROUTES.ADMIN_HISTORIES_DETAIL,
+                      item?.Customer.id
+                    )}
+                  >
+                    <b>{item?.Customer.full_name}</b>
+                  </Link>
                   <div>{item?.Customer.email}</div>
                   <div>{item?.Customer.phone}</div>
                 </td>
