@@ -8,6 +8,7 @@ import customerReducer from "./Customer/reducer";
 import employeeReducer from "./Employee/reducer";
 import guireReducer from "./Guire/reducer";
 import historiesReducer from "./Histories/reducer";
+import withdrawReducer from "./HistoriesWithDraw/reducer";
 import loginReducer from "./Login/reducer";
 import methodPaymentReducer from "./MethodPayment/reducer";
 import newsReducer from "./News/reducer";
@@ -25,6 +26,7 @@ const rootReducer = combineReducers({
   historiesReducer,
   contactReducer,
   methodPaymentReducer,
+  withdrawReducer,
 });
 
 export default rootReducer;

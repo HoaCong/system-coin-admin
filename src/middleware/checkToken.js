@@ -3,7 +3,6 @@ import { ROUTES } from "constants/routerWeb";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import { EnumHome } from "router";
 const checkTimeExpired = (timeExpired) => {
   const now = new Date().getTime();
   return now > timeExpired;
@@ -13,7 +12,7 @@ const CheckTokenMiddleware = ({ children }) => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const {
-    data: { access_token, timeExpired, user },
+    data: { access_token, timeExpired },
   } = useSelector((state) => state.loginReducer);
 
   useEffect(() => {
@@ -23,7 +22,7 @@ const CheckTokenMiddleware = ({ children }) => {
       if (isLoginPage) return;
       return navigate(ROUTES.LOGIN);
     } else if (isLoginPage || pathname === ROUTES.HOME_PAGE) {
-      return navigate(EnumHome[user?.role_id]);
+      return navigate(ROUTES.ADMIN_HOME_PAGE);
     }
   }, [access_token, pathname]);
 

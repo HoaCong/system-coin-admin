@@ -38,6 +38,9 @@ export const ENDPOINT = {
   LIST_HISTORIES: "api/admin/order-coins",
   CONFIRM_HISTORIES: (id) => `api/order-coins/submit/${id}`,
   CANCEL_HISTORIES: (id) => `api/order-coins/cancel/${id}`,
+  LIST_HISTORIES_WITHDRAW: "api/admin/order-draw",
+  CONFIRM_HISTORIES_WITHDRAW: (id) => `api/order-draw/submit/${id}`,
+  CANCEL_HISTORIES_WITHDRAW: (id) => `api/order-draw/cancel/${id}`,
   // ======api/contact======
   LIST_CONTACT: "api/contact",
   CONFIRM_CONTACT: (id) => `api/submitcontact/${id}`,

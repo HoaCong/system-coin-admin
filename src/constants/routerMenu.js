@@ -14,6 +14,12 @@ export const MENU_ADMIN = [
     icon: <i className="fas fa-history"></i>,
   },
   {
+    label: "Danh sách rút coin",
+    active: false,
+    src: ROUTES.ADMIN_HISTORIES_WITHDRAW,
+    icon: <i className="fas fa-history"></i>,
+  },
+  {
     label: "Coin",
     active: false,
     src: ROUTES.ADMIN_COIN,
