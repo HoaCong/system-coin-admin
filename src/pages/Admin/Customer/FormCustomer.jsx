@@ -7,6 +7,7 @@ import _isEmpty from "lodash/isEmpty";
 import _omit from "lodash/omit";
 import { useEffect, useState } from "react";
 import Form from "react-bootstrap/Form";
+import { NumericFormat } from "react-number-format";
 import { useDispatch, useSelector } from "react-redux";
 import { actionAdd, actionEdit } from "store/Customer/action";
 import { isValidPhoneNumber } from "../../../helper/functions";
@@ -155,6 +156,7 @@ function FormCustomer({ data: { type, visible, info }, onClear }) {
             Số điện thoại <span className="required">*</span>
           </Form.Label>
           <Form.Control
+            as={NumericFormat}
             type="text"
             id="Phone"
             name="phone"
