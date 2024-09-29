@@ -166,7 +166,7 @@ function FormEmployee({ data: { type, visible, info }, onClear }) {
           <Form.Select
             aria-label="Quyền"
             name="role_id"
-            value={data.role_id || "default"}
+            value={data.role_id || "EMPLOYEE"}
             onChange={handleChange}
             disabled={type !== "create"}
           >

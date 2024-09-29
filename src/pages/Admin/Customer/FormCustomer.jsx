@@ -161,7 +161,7 @@ function FormCustomer({ data: { type, visible, info }, onClear }) {
             id="Phone"
             name="phone"
             maxLength={11}
-            defaultValue={data.phone}
+            value={data.phone}
             aria-describedby="helperPhone"
             onChange={handleChange}
           />
