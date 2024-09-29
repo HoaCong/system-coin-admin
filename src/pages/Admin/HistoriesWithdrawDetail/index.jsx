@@ -5,6 +5,7 @@ import LinearProgress from "components/common/LinearProgress";
 import TemplateContent from "components/layout/TemplateContent";
 import { STATUS_LABEL } from "constants";
 import { format } from "date-fns";
+import { formatNumber } from "helper/functions";
 import _size from "lodash/size";
 import { useEffect, useState } from "react";
 import { Badge, Button, Form, Spinner } from "react-bootstrap"; // Import Tabs and Tab from react-bootstrap
@@ -126,6 +127,7 @@ function HistoriesWithdrawDetail(props) {
               <th scope="col">Mã SKU</th>
               <th scope="col">Khách hàng</th>
               <th scope="col">Số lượng coin</th>
+              <th scope="col">Số coin của khách</th>
               <th scope="col">Ví coin</th>
               <th scope="col">Trạng thái</th>
               <th scope="col">Hành động</th>
@@ -170,6 +172,12 @@ function HistoriesWithdrawDetail(props) {
                   <div>{item?.Customer?.phone}</div>
                 </td>
                 <td className="align-middle">{item?.count_coin}</td>
+                <td className="align-middle">
+                  <div>Pi Coin: <b>{formatNumber(item?.Customer?.picoin || 0)}</b></div>
+                  <div>
+                    Sidra Coin: <b>{formatNumber(item?.Customer?.sidracoin || 0)}</b>
+                  </div>
+                </td>
                 <td className="align-middle">{item?.wallet_coin}</td>
                 <td className="align-middle">
                   <Badge

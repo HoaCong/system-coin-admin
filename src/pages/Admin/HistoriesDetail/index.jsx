@@ -5,7 +5,7 @@ import LinearProgress from "components/common/LinearProgress";
 import TemplateContent from "components/layout/TemplateContent";
 import { STATUS_LABEL } from "constants";
 import { format } from "date-fns";
-import { formatCurrency } from "helper/functions";
+import { formatCurrency, formatNumber } from "helper/functions";
 import _size from "lodash/size";
 import { useEffect, useState } from "react";
 import { Badge, Button, Form, Spinner, Tab, Tabs } from "react-bootstrap"; // Import Tabs and Tab from react-bootstrap
@@ -141,7 +141,7 @@ function HistoriesDetail(props) {
         >
           <Tab eventKey="BUY" title="Khách Mua"></Tab>
           <Tab eventKey="SELL" title="Khách Bán"></Tab>
-          <Tab eventKey="SELL_HOT" title="Khách Bán Nóng"></Tab>
+          <Tab eventKey="SELL_HOT" title="Khách Bán Coin Trên Ví"></Tab>
         </Tabs>
 
         <table className="table table-hover table-striped">
@@ -154,6 +154,7 @@ function HistoriesDetail(props) {
               )}
               <th scope="col">Mã SKU</th>
               <th scope="col">Khách hàng</th>
+              <th scope="col">Số coin của khách</th>
               <th scope="col">Số lượng coin</th>
               <th scope="col">Giá coin</th>
               <th scope="col">Tổng tiền</th>
@@ -215,6 +216,12 @@ function HistoriesDetail(props) {
                   <div>{item?.Customer.email}</div>
                   <div>{item?.Customer.phone}</div>
                 </td>
+                <td className="align-middle">
+                  <div>Pi Coin: <b>{formatNumber(item?.Customer?.picoin || 0)}</b></div>
+                  <div>
+                    Sidra Coin: <b>{formatNumber(item?.Customer?.sidracoin || 0)}</b>
+                  </div>
+                </td>              
                 <td className="align-middle">
                   {tabKey === "BUY" ? (
                     <span className="text-danger"> -{item?.count_coin}</span>

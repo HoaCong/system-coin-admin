@@ -128,7 +128,7 @@ function Histories(props) {
         >
           <Tab eventKey="BUY" title="Khách Mua"></Tab>
           <Tab eventKey="SELL" title="Khách Bán"></Tab>
-          <Tab eventKey="SELL_HOT" title="Khách Bán Nóng"></Tab>
+          <Tab eventKey="SELL_HOT" title="Khách Bán Coin Trên Ví"></Tab>
         </Tabs>
 
         <table className="table table-hover table-striped">
