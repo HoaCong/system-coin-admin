@@ -7,12 +7,12 @@ import LinearProgress from "components/common/LinearProgress";
 import ToggleSwitch from "components/common/ToggleSwitch";
 import TemplateContent from "components/layout/TemplateContent";
 import { ROUTES } from "constants/routerWeb";
-import { parserRouter } from "helper/functions";
+import { formatNumber, parserRouter } from "helper/functions";
 import _size from "lodash/size";
 import { useEffect, useState } from "react";
 import { Button, Form, Spinner } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { actionDelete, actionGetList, resetData } from "store/Customer/action";
 import FormCustomer from "./FormCustomer";
 
@@ -127,6 +127,9 @@ function Customer(props) {
                 Tên khách hàng
               </th>
               <th scope="col" className="align-middle">
+                Số coin của khách
+              </th>
+              <th scope="col" className="align-middle">
                 Email
               </th>
               <th scope="col" className="align-middle">
@@ -171,7 +174,34 @@ function Customer(props) {
                     height={50}
                   />
                 </td>
-                <td className="align-middle">{item.full_name || "_"}</td>
+                <td className="align-middle">
+                  {item.full_name || "_"}
+                  <div className="d-flex gap-1">
+                    <Link
+                      to={parserRouter(ROUTES.ADMIN_HISTORIES_DETAIL, item.id)}
+                      className="text-success fw-bold"
+                    >
+                      <i className="fas fa-clock"></i> Giao dịch
+                    </Link>
+                    <Link
+                      to={parserRouter(
+                        ROUTES.ADMIN_HISTORIES_WITHDRAW_DETAIL,
+                        item.id
+                      )}
+                      className="text-danger fw-bold"
+                    >
+                      <i className="fas fa-clock"></i> Rút coin
+                    </Link>
+                  </div>
+                </td>
+                <td className="align-middle">
+                  <div>
+                    Pi Coin: <b>{formatNumber(item.picoin || 0)}</b>
+                  </div>
+                  <div>
+                    Sidra Coin: <b>{formatNumber(item.sidracoin || 0)}</b>
+                  </div>
+                </td>
                 <td className="align-middle">{item.email || "_"}</td>
                 <td className="align-middle">{item.phone || "_"}</td>
                 <td className="align-middle">{item.ref_email || "_"}</td>
