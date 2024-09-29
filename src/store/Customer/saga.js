@@ -70,7 +70,7 @@ function* callApiEdit({ params }) {
       phone,
       full_name,
       image,
-      // password,
+      password,
       // ref_email,
     });
 

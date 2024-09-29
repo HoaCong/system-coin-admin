@@ -52,7 +52,9 @@ function FormCustomer({ data: { type, visible, info }, onClear }) {
   };
 
   const handleSubmit = () => {
-    const tmpKey = Object.keys(_omit(data, "image"));
+    let tmpKey = Object.keys(
+      _omit(data, type === "edit" ? ["image", "ref_email"] : "image")
+    );
     let validates = true;
     tmpKey.forEach((key) => {
       if (data[key] === "") {
@@ -73,17 +75,6 @@ function FormCustomer({ data: { type, visible, info }, onClear }) {
         }));
         validates = false;
       }
-      // if (
-      //   data[key] !== "" &&
-      //   key === "password" &&
-      //   !isValidCodePin(data[key])
-      // ) {
-      //   setError((prevError) => ({
-      //     ...prevError,
-      //     [key]: `${_capitalize(key)} includes 6 numeric characters`,
-      //   }));
-      //   validates = false;
-      // }
     });
     if (validates) {
       if (type === "create") onAddCustomer({ ...data });
@@ -216,7 +207,7 @@ function FormCustomer({ data: { type, visible, info }, onClear }) {
             name="password"
             defaultValue={data.password}
             aria-describedby="helperPassword"
-            disabled={type === "detail" || type === "edit"}
+            disabled={type === "detail"}
             onChange={handleChange}
           />
           {error.password && (
