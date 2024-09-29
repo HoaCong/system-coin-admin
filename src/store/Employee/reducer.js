@@ -144,23 +144,6 @@ const employeeReducer = (state = initialState, action) => {
         draft.actionStatus.isFailure = true;
         break;
 
-      case ActionTypes.DOWNLOAD_EXCEL:
-        draft.actionStatus.isLoading = true;
-        draft.actionStatus.isSuccess = false;
-        draft.actionStatus.isFailure = false;
-        break;
-
-      case ActionTypes.DOWNLOAD_EXCEL_SUCCESS:
-        draft.actionStatus.isLoading = false;
-        draft.actionStatus.isSuccess = true;
-        draft.excel = action.payload;
-        break;
-
-      case ActionTypes.DOWNLOAD_EXCEL_FAILED:
-        draft.actionStatus.isLoading = false;
-        draft.actionStatus.isFailure = true;
-        break;
-
       case ActionTypes.RESET_DATA:
         return initialState;
 

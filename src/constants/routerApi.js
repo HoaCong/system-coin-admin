@@ -4,7 +4,7 @@ export const ENDPOINT = {
   // ======/api/employee======
   LIST_EMPLOYEE: "/api/employee/search",
   ADD_EMPLOYEE: "/api/employee/create",
-  EDIT_EMPLOYEE: "/api/employee/",
+  EDIT_EMPLOYEE: "/api/employee/changepassword/",
   ACTIVE_EMPLOYEE: "/api/employee/active/",
   DETAIL_EMPLOYEE: "/api/employee/",
   DELETE_EMPLOYEE: "/api/employee/",

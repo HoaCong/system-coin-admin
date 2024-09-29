@@ -1,8 +1,6 @@
 import { ENDPOINT } from "constants/routerApi";
-import { saveAs } from "file-saver";
 import { DELETE, GET, POST, PUT } from "helper/ajax";
 import { all, call, put, takeLatest, takeLeading } from "redux-saga/effects";
-import { actionLogout } from "store/Login/action";
 import { addToast } from "store/Toast/action";
 import {
   actionAddFailed,
@@ -13,8 +11,6 @@ import {
   actionDeleteSuccess,
   actionDetailFailed,
   actionDetailSuccess,
-  actionDownloadExcelFailed,
-  actionDownloadExcelSuccess,
   actionEditFailed,
   actionEditSuccess,
   actionGetListFailed,
@@ -302,57 +298,6 @@ function* callApiUpdateDetail({ params }) {
   }
 }
 
-function* callApiDownloadExcel({ params }) {
-  try {
-    const response = yield call(GET, ENDPOINT.DOWNLOAD_EXCEL, {
-      responseType: "blob",
-    });
-    if (response.status === 200) {
-      const blob = new Blob([response.data], {
-        type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-      });
-      saveAs(blob, "employee_library.xlsx");
-      yield put(actionDownloadExcelSuccess(response.data.data));
-      yield put(
-        addToast({
-          text: "Tải xuống thành công",
-          type: "success",
-          title: "",
-        })
-      );
-    } else {
-      yield put(actionDownloadExcelFailed());
-      yield put(
-        addToast({
-          text: "Tải xuống thất bại",
-          type: "danger",
-          title: "",
-        })
-      );
-    }
-  } catch (error) {
-    // if (error.response.status === 401) {
-    //   yield put(actionLogout());
-    //   yield put(
-    //     addToast({
-    //       text: "Tài khoản được đăng nhập từ nơi khác, vui lòng đăng nhập lại để sử dụng",
-    //       type: "warning",
-    //       title: "",
-    //       life: 5000,
-    //     })
-    //   );
-    // }
-    yield put(actionDownloadExcelFailed(error.response.data.error));
-    yield put(
-      addToast({
-        text: "Tải xuống thất bại",
-        type: "danger",
-        title: "",
-      })
-    );
-  }
-}
-
 export default function* employeeSaga() {
   yield all([
     yield takeLeading(ActionTypes.LIST, callApiList),
@@ -362,6 +307,5 @@ export default function* employeeSaga() {
     yield takeLatest(ActionTypes.DELETE, callApiDelete),
     yield takeLatest(ActionTypes.DETAIL, callApiDetail),
     yield takeLatest(ActionTypes.UPDATE, callApiUpdateDetail),
-    yield takeLatest(ActionTypes.DOWNLOAD_EXCEL, callApiDownloadExcel),
   ]);
 }

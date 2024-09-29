@@ -4,9 +4,8 @@ import _capitalize from "lodash/capitalize";
 import _isEmpty from "lodash/isEmpty";
 import _map from "lodash/map";
 import _omit from "lodash/omit";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Form from "react-bootstrap/Form";
-import { NumericFormat } from "react-number-format";
 import { useDispatch, useSelector } from "react-redux";
 import { actionAdd, actionEdit } from "store/Employee/action";
 import { isValidPhoneNumber } from "../../../helper/functions";
@@ -167,9 +166,9 @@ function FormEmployee({ data: { type, visible, info }, onClear }) {
           <Form.Select
             aria-label="Quyền"
             name="role_id"
-            value={data.role_id}
+            value={data.role_id || "default"}
             onChange={handleChange}
-            disabled={type === "detail"}
+            disabled={type !== "create"}
           >
             <option value="" disabled>
               Chọn quyền
