@@ -3,6 +3,7 @@ import ActionTable from "components/common/ActionTable";
 import CustomPagination from "components/common/CustomPagination";
 import CustomTooltip from "components/common/CustomTooltip";
 import LazyLoadImage from "components/common/LazyLoadImage";
+import TextLineClamp from "components/common/TextLineClamp";
 import TemplateContent from "components/layout/TemplateContent";
 import _size from "lodash/size";
 import { useEffect, useState } from "react";
@@ -117,7 +118,9 @@ function Guire(props) {
                   />
                 </td>
                 <td className="align-middle">{item.title}</td>
-                <td className="align-middle">{item.content}</td>
+                <td className="align-middle">
+                  <TextLineClamp line={5}>{item.content}</TextLineClamp>
+                </td>
                 <td className="align-middle">{item.video_url}</td>
                 <td className="align-middle" style={{ width: 200 }}>
                   <ActionTable
