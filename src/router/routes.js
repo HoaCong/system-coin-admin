@@ -23,11 +23,16 @@ export const EnumHome = {
 
 export const adminRoutes = [
   {
-    path: ROUTES.ADMIN_HOME_PAGE,
+    path: ROUTES.HOME_PAGE,
     name: "Admin Layout",
     element: <AdminLayout />,
     children: [
       { isRoot: true, name: "Histories Page", element: <AdminHistories /> },
+      {
+        path: ROUTES.ADMIN_HOME_PAGE,
+        name: "Histories Page",
+        element: <AdminHistories />,
+      },
       {
         path: ROUTES.ADMIN_EMPLOYEE,
         name: "Employee Page",
